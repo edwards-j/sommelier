@@ -18,5 +18,13 @@ namespace Sommelier.Models
         public int VarietyId { get; set; }
 
         public int Year { get; set; }
+
+        public string ApplicationUserId { get; set; }
+
+        public bool Favorite { get; set; }
+
+        public int Quantity { get; set; }
+
+        public ApplicationUser ApplicationUser { get; set; }
     }
 }
