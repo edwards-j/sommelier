@@ -6,9 +6,9 @@
 
 <div>
     <div>
-        <h2>
-           Wines that pair well with @Model.Food.Name
-        </h2>
+        <h3>
+           Since you're eating @Model.Food.Name, I'd recommend one of these from your cellar
+        </h3>
     </div>
     <div>
         @foreach (var item in Model.FoodCategories)
@@ -17,10 +17,14 @@
             {
                 @foreach (var wine in variety.Wines)
                 {
-                    <div>
-                        @wine.Name
-                        @wine.Winery.Name
-                        @wine.Variety.Name
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">@wine.Winery.Name @wine.Variety.Name - @wine.Year</h3>
+                        </div>
+                        <div class="panel-body">
+                            <p>@wine.Name</p>
+                            <p>@wine.Quantity</p>
+                        </div>
                     </div>
                 }
             }

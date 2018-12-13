@@ -4,62 +4,33 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2>My Cellar</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Add New Wine</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WineryId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VarietyId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Year)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Favorite)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Winery.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Variety.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Year)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Favorite)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.WineId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.WineId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.WineId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+    @foreach (var item in Model)
+    {
+        <a asp-action="Details" asp-route-id="@item.WineId">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">@item.Winery.Name @item.Variety.Name - @item.Year</h3>
+                </div>
+                @if (item.Name == null)
+                {
+                    <div class="panel-body">
+                        <p>Bottles in your cellar: @item.Quantity</p>
+                    </div>
+                }
+                @if (item.Name != null)
+                {
+                <div class="panel-body">
+                    <p>Wine Name: @item.Name</p>
+                    <p>Bottles in your cellar: @item.Quantity</p>
+                </div>
+                }
+            </div>
+        </a>
+    }
+            

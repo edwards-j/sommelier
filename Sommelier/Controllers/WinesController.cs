@@ -39,7 +39,8 @@ namespace Sommelier.Controllers
 
             var view = _context.Wine
                 .Include(w => w.Winery)
-                .Include(w => w.Variety);
+                .Include(w => w.Variety)
+                .Where(w => w.ApplicationUserId == user.Id);
 
             return View(await view.ToListAsync());  
         }
