@@ -13,21 +13,17 @@
     <div>
         @foreach (var item in Model.FoodCategories)
         {
-            @foreach (var variety in item.Category.Varieties)
-            {
-                @foreach (var wine in variety.Wines)
-                {
+           
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h3 class="panel-title">@wine.Winery.Name @wine.Variety.Name - @wine.Year</h3>
+                            <h3 class="panel-title">@item.Category.Variety.Wine.Winery.Name @item.Category.Variety.Wine.Variety.Name - @item.Category.Variety.Wine.Year</h3>
                         </div>
                         <div class="panel-body">
-                            <p>@wine.Name</p>
-                            <p>@wine.Quantity</p>
+                            <p>@item.Category.Variety.Wine.Name</p>
+                            <p>@item.Category.Variety.Wine.Quantity</p>
                         </div>
                     </div>
-                }
-            }
+                
         }
     </div>
     </div>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,12 +14,22 @@ namespace Sommelier.Controllers
 {
     public class FoodsController : Controller
     {
+        // Create variable to represent database
         private readonly ApplicationDbContext _context;
 
-        public FoodsController(ApplicationDbContext context)
+        // Create variable to represent User Data
+        private readonly UserManager<ApplicationUser> _userManager;
+
+
+        // Pass in arguments from private varaibles to be used publicly
+        public FoodsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
+            _userManager = userManager;
             _context = context;
         }
+
+        // Create component to get current user from the _userManager variable
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         // GET: Foods
         public async Task<IActionResult> Index()
@@ -34,6 +45,8 @@ namespace Sommelier.Controllers
                 return NotFound();
             }
 
+            var user = await GetCurrentUserAsync();
+
             FoodPairingViewModel viewModel = new FoodPairingViewModel();
 
             var food = await _context.Food
@@ -43,10 +56,11 @@ namespace Sommelier.Controllers
 
             var wine = await _context.FoodCategory
                 .Include(fc => fc.Category)
-                    .ThenInclude(c => c.Varieties)
-                        .ThenInclude(v => v.Wines)
+                    .ThenInclude(c => c.Variety)
+                        .ThenInclude(v => v.Wine)
                             .ThenInclude(w => w.Winery)
                  .Where(f => f.FoodId == id)
+                 .Where(fc => fc.Category.Variety.Wine.ApplicationUserId == user.Id)
                 .ToListAsync();
 
             viewModel.FoodCategories = wine;

@@ -15,6 +15,6 @@ namespace Sommelier.Models
 
         public virtual ICollection<FoodCategory> FoodCategory { get; set; }
 
-        public virtual List<Variety> Varieties { get; set; }
+        public virtual Variety Variety { get; set; }
     }
 }
