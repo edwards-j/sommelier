@@ -1,0 +1,32 @@
+﻿@model Sommelier.Models.ViewModels.FoodPairingViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div>
+    <div>
+        <h2>
+           Wines that pair well with @Model.Food.Name
+        </h2>
+    </div>
+    <div>
+        @foreach (var item in Model.FoodCategories)
+        {
+            @foreach (var variety in item.Category.Varieties)
+            {
+                @foreach (var wine in variety.Wines)
+                {
+                    <div>
+                        @wine.Name
+                        @wine.Winery.Name
+                        @wine.Variety.Name
+                    </div>
+                }
+            }
+        }
+    </div>
+    </div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -14,5 +14,7 @@ namespace Sommelier.Models
         public int FoodId { get; set; }
 
         public int CategoryId { get; set; }
+
+        public Category Category { get; set; }
     }
 }
