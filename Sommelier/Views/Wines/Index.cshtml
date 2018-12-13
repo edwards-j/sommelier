@@ -30,9 +30,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Quantity)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ApplicationUser)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -43,10 +40,10 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.WineryId)
+                @Html.DisplayFor(modelItem => item.Winery.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.VarietyId)
+                @Html.DisplayFor(modelItem => item.Variety.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Year)
@@ -56,9 +53,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ApplicationUser.Id)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.WineId">Edit</a> |

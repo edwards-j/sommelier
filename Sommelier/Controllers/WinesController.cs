@@ -37,9 +37,11 @@ namespace Sommelier.Controllers
         {
             ApplicationUser user = await GetCurrentUserAsync();
 
-            return View(await _context.Wine
-                //.Where(w => w.UserId.ToString() == user.Id.ToString())
-                .ToListAsync());
+            var view = _context.Wine
+                .Include(w => w.Winery)
+                .Include(w => w.Variety);
+
+            return View(await view.ToListAsync());  
         }
 
         // GET: Wines/Details/5
@@ -51,6 +53,8 @@ namespace Sommelier.Controllers
             }
 
             var wine = await _context.Wine
+                .Include(w => w.Winery)
+                .Include(w => w.Variety)
                 .FirstOrDefaultAsync(m => m.WineId == id);
             if (wine == null)
             {
@@ -160,7 +164,7 @@ namespace Sommelier.Controllers
                 // Add the user back
                 newWine.Wine.ApplicationUserId = user.Id;
 
-                // Add the product
+                // Add the wine
                 _context.Add(newWine.Wine);
 
                 // Save changes to database
@@ -168,6 +172,38 @@ namespace Sommelier.Controllers
 
                 // Redirect to details view with id of product made using new object
                 return RedirectToAction(nameof(Details), new { id = newWine.Wine.WineId.ToString() });
+            }
+            return View(newWine);
+        }
+
+        // POST: Wines/CreateWinery
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> CreateWinery(CreateWineViewModel newWine)
+        {
+            var user = await GetCurrentUserAsync();
+
+            // If the user is already in the ModelState
+            // Remove user from model state
+            ModelState.Remove("wine.User");
+            ModelState.Remove("newWine.Wine.User");
+
+            // If model state is valid
+            if (ModelState.IsValid)
+            {
+                //If a user enters a new winery name
+                if (newWine.Winery.Name != null)
+                {
+                    //Add that winery to the database
+                    _context.Add(newWine.Winery);
+
+                    await _context.SaveChangesAsync();
+                }
+                // Redirect to details view with id of product made using new object
+                return RedirectToAction(nameof(Create));
             }
             return View(newWine);
         }
@@ -235,6 +271,8 @@ namespace Sommelier.Controllers
 
             var wine = await _context.Wine
                 .Include(w => w.ApplicationUser)
+                .Include(w => w.Winery)
+                .Include(w => w.Variety)
                 .FirstOrDefaultAsync(m => m.WineId == id);
             if (wine == null)
             {

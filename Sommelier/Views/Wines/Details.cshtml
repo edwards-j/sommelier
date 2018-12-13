@@ -20,13 +20,13 @@
             @Html.DisplayNameFor(model => model.WineryId)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.WineryId)
+            @Html.DisplayFor(model => model.Winery.Name)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.VarietyId)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.VarietyId)
+            @Html.DisplayFor(model => model.Variety.Name)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Year)
@@ -45,12 +45,6 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Quantity)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ApplicationUser)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ApplicationUser.Id)
         </dd>
     </dl>
 </div>
