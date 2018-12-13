@@ -12,5 +12,7 @@ namespace Sommelier.Models
         public int FoodId { get; set; }
 
         public string Name { get; set; }
+
+        public virtual ICollection<FoodCategory> FoodCategory { get; set; }
     }
 }

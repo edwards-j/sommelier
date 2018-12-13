@@ -13,10 +13,25 @@ namespace Sommelier.Models
 
         public string Name { get; set; }
 
+        [Display(Name ="Winery")]          
         public int WineryId { get; set; }
 
+        [Display(Name = "Variety")]
         public int VarietyId { get; set; }
 
         public int Year { get; set; }
+
+        public string ApplicationUserId { get; set; }
+
+        public bool Favorite { get; set; }
+
+        [Display(Name = "Bottles")]
+        public int Quantity { get; set; }
+
+        public ApplicationUser ApplicationUser { get; set; }
+
+        public virtual Winery Winery { get; set; }
+
+        public virtual Variety Variety { get; set; }
     }
 }

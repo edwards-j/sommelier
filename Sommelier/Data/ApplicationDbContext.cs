@@ -12,13 +12,13 @@ namespace Sommelier.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)  : base(options){ }
 
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
         public DbSet<Category> Category { get; set; }
 
         public DbSet<Food> Food { get; set; }
 
         public DbSet<FoodCategory> FoodCategory { get; set; }
-
-        public DbSet<UserWine> UserWine { get; set; }
 
         public DbSet<Variety> Variety { get; set; }
 
@@ -155,7 +155,7 @@ namespace Sommelier.Data
                 new Variety()
                 {
                     VarietyId = 8,
-                    Name = " Malvasia",
+                    Name = "Malvasia",
                     CategoryId = 2
                 }, 
                 new Variety()
@@ -412,8 +412,10 @@ namespace Sommelier.Data
                    Name = "Heminway Vineyard",
                    VarietyId = 26,
                    WineryId = 1 ,
-                   Year = 2015
-
+                   Year = 2015,
+                   ApplicationUserId = user.Id,
+                   Favorite = false,
+                   Quantity = 2
                },
                new Wine()
                {
@@ -421,30 +423,12 @@ namespace Sommelier.Data
                    WineryId = 2,
                    Name = "Red Fox",
                    VarietyId = 23,
-                   Year = 2016
+                   Year = 2016,
+                   ApplicationUserId = user2.Id,
+                   Favorite = true,
+                   Quantity = 4
                }
            );
-
-            modelBuilder.Entity<UserWine>().HasData(
-               new UserWine()
-               {
-                   UserWineId = 1,
-                   UserId = 1,
-                   WineId = 1,
-                   Favorite = false
-
-               },
-               new UserWine()
-               {
-                   UserWineId = 2,
-                   UserId = 2,
-                   WineId = 2,
-                   Favorite = false
-               }
-           );
-
-
-
             modelBuilder.Entity<FoodCategory>().HasData(
                 new FoodCategory()
                 {

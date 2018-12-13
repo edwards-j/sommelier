@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sommelier.Data;
 
-namespace Sommelier.Data.Migrations
+namespace Sommelier.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181212215241_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -252,6 +254,10 @@ namespace Sommelier.Data.Migrations
 
                     b.HasKey("FoodCategoryId");
 
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("FoodId");
+
                     b.ToTable("FoodCategory");
 
                     b.HasData(
@@ -295,28 +301,6 @@ namespace Sommelier.Data.Migrations
                     );
                 });
 
-            modelBuilder.Entity("Sommelier.Models.UserWine", b =>
-                {
-                    b.Property<int>("UserWineId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("Favorite");
-
-                    b.Property<int>("UserId");
-
-                    b.Property<int>("WineId");
-
-                    b.HasKey("UserWineId");
-
-                    b.ToTable("UserWine");
-
-                    b.HasData(
-                        new { UserWineId = 1, Favorite = false, UserId = 1, WineId = 1 },
-                        new { UserWineId = 2, Favorite = false, UserId = 2, WineId = 2 }
-                    );
-                });
-
             modelBuilder.Entity("Sommelier.Models.Variety", b =>
                 {
                     b.Property<int>("VarietyId")
@@ -339,7 +323,7 @@ namespace Sommelier.Data.Migrations
                         new { VarietyId = 5, CategoryId = 1, Name = "Albariño" },
                         new { VarietyId = 6, CategoryId = 2, Name = "Gewürtzraminer" },
                         new { VarietyId = 7, CategoryId = 2, Name = "Müller-Thurgau" },
-                        new { VarietyId = 8, CategoryId = 2, Name = " Malvasia" },
+                        new { VarietyId = 8, CategoryId = 2, Name = "Malvasia" },
                         new { VarietyId = 9, CategoryId = 2, Name = "Moscato" },
                         new { VarietyId = 10, CategoryId = 2, Name = "Riesling" },
                         new { VarietyId = 11, CategoryId = 3, Name = "Chardonnay" },
@@ -380,7 +364,11 @@ namespace Sommelier.Data.Migrations
 
                     b.Property<string>("ApplicationUserId");
 
+                    b.Property<bool>("Favorite");
+
                     b.Property<string>("Name");
+
+                    b.Property<int>("Quantity");
 
                     b.Property<int>("VarietyId");
 
@@ -395,8 +383,8 @@ namespace Sommelier.Data.Migrations
                     b.ToTable("Wine");
 
                     b.HasData(
-                        new { WineId = 1, Name = "Heminway Vineyard", VarietyId = 26, WineryId = 1, Year = 2015 },
-                        new { WineId = 2, Name = "Red Fox", VarietyId = 23, WineryId = 2, Year = 2016 }
+                        new { WineId = 1, ApplicationUserId = "1046bb11-3081-4296-96b1-4f54aea21dd4", Favorite = false, Name = "Heminway Vineyard", Quantity = 2, VarietyId = 26, WineryId = 1, Year = 2015 },
+                        new { WineId = 2, ApplicationUserId = "60123b69-e0ea-4b4a-a43b-1a7abaadea41", Favorite = true, Name = "Red Fox", Quantity = 4, VarietyId = 23, WineryId = 2, Year = 2016 }
                     );
                 });
 
@@ -433,8 +421,8 @@ namespace Sommelier.Data.Migrations
                     b.HasDiscriminator().HasValue("ApplicationUser");
 
                     b.HasData(
-                        new { Id = "b4216c5f-9375-4252-bbd9-5b0c80f005f8", AccessFailedCount = 0, ConcurrencyStamp = "f7d02897-9ee8-4fa0-9118-2582f0aca8e2", Email = "admin@admin.com", EmailConfirmed = true, LockoutEnabled = false, NormalizedEmail = "ADMIN@ADMIN.COM", NormalizedUserName = "ADMIN@ADMIN.COM", PasswordHash = "AQAAAAEAACcQAAAAEKa1uHkNj1irrpODqdeLJOZKcQ6Tt6OLSb7EzP90ZNxPODYa7y1SziZ6OYCZIYQjpQ==", PhoneNumberConfirmed = false, SecurityStamp = "157239e4-80e0-4c03-bee8-87fef6074b95", TwoFactorEnabled = false, UserName = "admin@admin.com", FirstName = "admin", LastName = "admin" },
-                        new { Id = "e25e8cce-ea21-4819-bd59-390b4475e544", AccessFailedCount = 0, ConcurrencyStamp = "8853151b-3462-4ec2-bd8a-b2c5c8407d03", Email = "jonathan@edwards.com", EmailConfirmed = true, LockoutEnabled = false, NormalizedEmail = "JONATHAN@EDWARDS.COM", NormalizedUserName = "JONATHAN@EDWARDS.COM", PasswordHash = "AQAAAAEAACcQAAAAEGmTAPTCbrT/Tvn1QemU+lHOhDA97eHQcm5E7ILt4frp6JF3RFLV4fXw9CI49KWHqA==", PhoneNumberConfirmed = false, SecurityStamp = "5d8c967f-2816-4bf8-aaf4-a78e59331d55", TwoFactorEnabled = false, UserName = "jonathan@edwards.com", FirstName = "Jonathan", LastName = "Edwards" }
+                        new { Id = "1046bb11-3081-4296-96b1-4f54aea21dd4", AccessFailedCount = 0, ConcurrencyStamp = "ac04518b-080b-45f4-9128-81aab10dcc11", Email = "admin@admin.com", EmailConfirmed = true, LockoutEnabled = false, NormalizedEmail = "ADMIN@ADMIN.COM", NormalizedUserName = "ADMIN@ADMIN.COM", PasswordHash = "AQAAAAEAACcQAAAAEFCEHVpMSH+BUTopJE9KNzE/y+IYOOlMb6+wWRYhWX+Zb7Lkx22GC/58J4bhw8JghQ==", PhoneNumberConfirmed = false, SecurityStamp = "fef6e553-15f5-4f90-8bd1-a0abe981760f", TwoFactorEnabled = false, UserName = "admin@admin.com", FirstName = "admin", LastName = "admin" },
+                        new { Id = "60123b69-e0ea-4b4a-a43b-1a7abaadea41", AccessFailedCount = 0, ConcurrencyStamp = "e7437028-ecb1-4dd6-aadc-c136f3cbdd5e", Email = "jonathan@edwards.com", EmailConfirmed = true, LockoutEnabled = false, NormalizedEmail = "JONATHAN@EDWARDS.COM", NormalizedUserName = "JONATHAN@EDWARDS.COM", PasswordHash = "AQAAAAEAACcQAAAAEA/FDTeM/Dw7wmlZsbSCcEpTJvse3gMagOtuT6cKQlGYhisamoP5eE3qtOzEzNVaBg==", PhoneNumberConfirmed = false, SecurityStamp = "f0f1bfd1-791d-42e0-8b5d-100b88c5f8b0", TwoFactorEnabled = false, UserName = "jonathan@edwards.com", FirstName = "Jonathan", LastName = "Edwards" }
                     );
                 });
 
@@ -483,9 +471,22 @@ namespace Sommelier.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("Sommelier.Models.FoodCategory", b =>
+                {
+                    b.HasOne("Sommelier.Models.Category")
+                        .WithMany("FoodCategory")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Sommelier.Models.Food")
+                        .WithMany("FoodCategory")
+                        .HasForeignKey("FoodId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Sommelier.Models.Wine", b =>
                 {
-                    b.HasOne("Sommelier.Models.ApplicationUser")
+                    b.HasOne("Sommelier.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("Wines")
                         .HasForeignKey("ApplicationUserId");
                 });
