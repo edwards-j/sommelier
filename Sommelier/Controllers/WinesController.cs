@@ -39,7 +39,8 @@ namespace Sommelier.Controllers
 
             var view = _context.Wine
                 .Include(w => w.Winery)
-                .Include(w => w.Variety);
+                .Include(w => w.Variety)
+                .Where(w => w.ApplicationUserId == user.Id);
 
             return View(await view.ToListAsync());  
         }
@@ -216,7 +217,10 @@ namespace Sommelier.Controllers
                 return NotFound();
             }
 
-            var wine = await _context.Wine.FindAsync(id);
+            var wine = await _context.Wine
+                .Include(w => w.Winery)
+                .Include(w => w.Variety)
+                .FirstOrDefaultAsync(m => m.WineId == id);
             if (wine == null)
             {
                 return NotFound();
@@ -230,20 +234,25 @@ namespace Sommelier.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("WineId,Name,WineryId,VarietyId,Year,ApplicationUserId,Favorite,Quantity")] Wine wine)
+        public async Task<IActionResult> Edit(int id, Wine wine)
         {
             if (id != wine.WineId)
             {
                 return NotFound();
             }
 
+            var user = await GetCurrentUserAsync();
+
             if (ModelState.IsValid)
             {
                 try
                 {
+                    wine.ApplicationUserId = user.Id;
+
                     _context.Update(wine);
                     await _context.SaveChangesAsync();
                 }
+
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!WineExists(wine.WineId))

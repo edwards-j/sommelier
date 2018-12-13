@@ -14,5 +14,9 @@ namespace Sommelier.Models
         public string Name { get; set; }
 
         public int CategoryId { get; set; }
+
+        public virtual Category Category { get; set; }
+
+        public virtual Wine Wine { get; set; }
     }
 }
