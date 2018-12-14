@@ -37,12 +37,14 @@ namespace Sommelier.Controllers
         {
             ApplicationUser user = await GetCurrentUserAsync();
 
-            var view = _context.Wine
-                .Include(w => w.Winery)
+            List<Wine> view = await _context.Wine
                 .Include(w => w.Variety)
-                .Where(w => w.ApplicationUserId == user.Id);
+                .Include(w => w.Winery)
+                .OrderByDescending(w => w.WineId)
+                .Where(w => w.ApplicationUserId == user.Id)
+                .ToListAsync();
 
-            return View(await view.ToListAsync());  
+            return View(view);  
         }
 
         // GET: Wines/Details/5

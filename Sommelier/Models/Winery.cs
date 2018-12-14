@@ -12,5 +12,7 @@ namespace Sommelier.Models
         public int WineryId { get; set; }
 
         public string Name { get; set; }
+
+        public virtual ICollection<Wine> Wines { get; set; }
     }
 }

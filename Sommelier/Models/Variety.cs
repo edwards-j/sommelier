@@ -17,6 +17,9 @@ namespace Sommelier.Models
 
         public virtual Category Category { get; set; }
 
-        public virtual Wine Wine { get; set; }
+        //public virtual Wine Wine { get; set; }
+
+          
+        public virtual ICollection<Wine> Wines { get; set;}
     }
 }

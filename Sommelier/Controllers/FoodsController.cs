@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -32,12 +33,14 @@ namespace Sommelier.Controllers
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         // GET: Foods
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Food.ToListAsync());
         }
 
         // GET: Foods/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -54,14 +57,23 @@ namespace Sommelier.Controllers
 
             viewModel.Food = food;
 
-            var wine = await _context.FoodCategory
+
+            /*var wine = await _context.FoodCategory
                 .Include(fc => fc.Category)
                     .ThenInclude(c => c.Variety)
-                        .ThenInclude(v => v.Wine)
+                        .ThenInclude(v => v.Wines)
                             .ThenInclude(w => w.Winery)
                  .Where(f => f.FoodId == id)
-                 .Where(fc => fc.Category.Variety.Wine.ApplicationUserId == user.Id)
-                .ToListAsync();
+                 .ToListAsync();
+                 */
+
+            var wine = await _context.Wine
+                .SelectMany(w => w.Variety.Category.FoodCategory.Where(fc => fc.FoodId == id))
+                    .Include(fc => fc.Category.Variety)
+                        .ThenInclude(v => v.Category)
+                            .ThenInclude(c => c.FoodCategory)
+                 .ToListAsync();
+                
 
             viewModel.FoodCategories = wine;
 
@@ -72,6 +84,7 @@ namespace Sommelier.Controllers
 
             return View(viewModel);
         }
+        
 
         // GET: Foods/Create
         public IActionResult Create()
