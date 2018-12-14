@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Sommelier.Models;
+using Sommelier.Models.ViewModels;
 
 namespace Sommelier.Data
 {
@@ -654,5 +655,7 @@ namespace Sommelier.Data
                 }
             );
         }
+
+        //public DbSet<Sommelier.Models.ViewModels.FoodPairingViewModel> FoodPairingViewModel { get; set; }
     }
 }

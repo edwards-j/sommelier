@@ -10,27 +10,26 @@
     <a asp-action="Create">Add New Wine</a>
 </p>
 
-    @foreach (var item in Model)
-    {
-        <a asp-action="Details" asp-route-id="@item.WineId">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">@item.Winery.Name @item.Variety.Name - @item.Year</h3>
+@foreach (var item in Model)
+{
+    <a asp-action="Details" asp-route-id="@item.WineId">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">@item.Winery.Name @item.Variety.Name - @item.Year</h3>
+            </div>
+            @if (item.Name == null)
+            {
+                <div class="panel-body">
+                    <p>Bottles in your cellar: @item.Quantity</p>
                 </div>
-                @if (item.Name == null)
-                {
-                    <div class="panel-body">
-                        <p>Bottles in your cellar: @item.Quantity</p>
-                    </div>
-                }
-                @if (item.Name != null)
-                {
+            }
+            @if (item.Name != null)
+            {
                 <div class="panel-body">
                     <p>Wine Name: @item.Name</p>
                     <p>Bottles in your cellar: @item.Quantity</p>
                 </div>
-                }
-            </div>
-        </a>
-    }
-            
+            }
+        </div>
+    </a>
+}
