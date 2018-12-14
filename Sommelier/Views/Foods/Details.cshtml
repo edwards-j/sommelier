@@ -11,10 +11,8 @@
         </h3>
     </div>
     <div>
-        @foreach (var item in Model.FoodCategories)
+        @foreach (var wine in Model.Wines)
         {
-            @foreach (var wine in item.Category.Variety.Wines)
-            { 
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">@wine.Winery.Name @wine.Variety.Name - @wine.Year</h3>
@@ -24,7 +22,7 @@
                     <p>@wine.Quantity</p>
                 </div>
             </div>
-            }
+            
         }
     </div>
 </div>

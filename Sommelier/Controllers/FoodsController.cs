@@ -67,15 +67,19 @@ namespace Sommelier.Controllers
                  .ToListAsync();
                  */
 
+            
             var wine = await _context.Wine
-                .SelectMany(w => w.Variety.Category.FoodCategory.Where(fc => fc.FoodId == id))
-                    .Include(fc => fc.Category.Variety)
-                        .ThenInclude(v => v.Category)
-                            .ThenInclude(c => c.FoodCategory)
-                 .ToListAsync();
+                .Where(w => w.ApplicationUserId == user.Id)
+                .Include(w => w.Winery)
+                .Include(w => w.Variety)
+                    .ThenInclude(v => v.Category)
+                        .ThenInclude(c => c.FoodCategory)
+                        .Where(w => w.Variety.Category.FoodCategory.Any(fc => fc.FoodId == id))
+                .ToListAsync()
+                ;
                 
 
-            viewModel.FoodCategories = wine;
+            viewModel.Wines = wine;
 
             if (food == null)
             {
