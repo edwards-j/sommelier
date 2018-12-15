@@ -7,7 +7,7 @@ namespace Sommelier.Models.ViewModels
 {
     public class FoodPairingViewModel
     {
-        public List<FoodCategory> FoodCategories { get; set; }
+        public string FoodCategories { get; set; }
 
         public List<Wine> Wines { get; set; }
 

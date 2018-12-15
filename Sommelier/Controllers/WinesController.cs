@@ -130,10 +130,22 @@ namespace Sommelier.Controllers
                 Value = ""
             });
 
-            // Insert starting position into winery list
-            Wineries.Insert(0, new SelectListItem
+            //Insert Wine categories to make options easier to read
+            Varieties.Insert(1 , new SelectListItem
             {
-                Text = "Assign a winery...",
+                Text = "--- Dry Whites ---",
+                Value = ""
+            });
+
+            Varieties.Insert(7, new SelectListItem
+            {
+                Text = "--- Sweet Whites ---",
+                Value = ""
+            });
+
+            Varieties.Insert(13, new SelectListItem
+            {
+                Text = "--- Rich White ---",
                 Value = ""
             });
 

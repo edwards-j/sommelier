@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Sommelier.Data;
 using Sommelier.Models;
 using Sommelier.Models.ViewModels;
@@ -57,17 +58,6 @@ namespace Sommelier.Controllers
 
             viewModel.Food = food;
 
-
-            /*var wine = await _context.FoodCategory
-                .Include(fc => fc.Category)
-                    .ThenInclude(c => c.Variety)
-                        .ThenInclude(v => v.Wines)
-                            .ThenInclude(w => w.Winery)
-                 .Where(f => f.FoodId == id)
-                 .ToListAsync();
-                 */
-
-            
             var wine = await _context.Wine
                 .Where(w => w.ApplicationUserId == user.Id)
                 .Include(w => w.Winery)
@@ -81,9 +71,28 @@ namespace Sommelier.Controllers
 
             viewModel.Wines = wine;
 
-            if (food == null)
+            var Categories = await _context.FoodCategory
+                .Include(fc => fc.Category)
+                .Where(fc => fc.FoodId == id)
+                .ToListAsync();
+
+            List<string> names = Categories.Select(fc => fc.Category.Name).ToList();
+            
+            if (names.Count() == 2)
             {
-                return NotFound();
+                viewModel.FoodCategories = names.Join(" or ");
+            }
+
+            if (names.Count() > 2)
+            {
+                names.Insert(names.Count() - 1, "or");
+
+                viewModel.FoodCategories = names.Join(", ");
+            }
+
+            if (viewModel.Wines.Count == 0)
+            {
+                return View("NoWineFound", viewModel);
             }
 
             return View(viewModel);
