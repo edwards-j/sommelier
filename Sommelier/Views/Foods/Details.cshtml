@@ -13,6 +13,8 @@
     <div>
         @foreach (var wine in Model.Wines)
         {
+            if (wine.Quantity > 0)
+            {
             <a asp-controller="Wines" asp-action="RemoveBottleConfirm" asp-route-id="@wine.WineId">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -23,15 +25,16 @@
                         @if (wine.Quantity == 1)
                         {
                         <p>You have @wine.Quantity bottle</p>
-                        } else
+                        }
+                        else
                         {
                         <p>You have @wine.Quantity bottles</p>
                         }
                     </div>
                 </div>
             </a>
-
-                }
+            }
+        }
         </div>
 </div>
 <div>

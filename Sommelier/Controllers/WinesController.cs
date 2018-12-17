@@ -326,6 +326,8 @@ namespace Sommelier.Controllers
         [Authorize]
         public async Task<IActionResult> RemoveBottleConfirm(int? id)
         {
+            RemoveBottleConfirmViewModel viewModel = new RemoveBottleConfirmViewModel();
+
             if (id == null)
             {
                 return NotFound();
