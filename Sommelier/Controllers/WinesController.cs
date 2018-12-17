@@ -44,7 +44,7 @@ namespace Sommelier.Controllers
                 .Where(w => w.ApplicationUserId == user.Id)
                 .ToListAsync();
 
-            return View(view);  
+            return View(view);
         }
 
         // GET: Wines/Details/5
@@ -131,7 +131,7 @@ namespace Sommelier.Controllers
             });
 
             //Insert Wine categories to make options easier to read
-            Varieties.Insert(1 , new SelectListItem
+            Varieties.Insert(1, new SelectListItem
             {
                 Text = "--- Dry Whites ---",
                 Value = ""
@@ -319,6 +319,45 @@ namespace Sommelier.Controllers
         private bool WineExists(int id)
         {
             return _context.Wine.Any(e => e.WineId == id);
+        }
+
+        //GET: Wines/RemoveFromCellar/5
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> RemoveBottleConfirm(int? id)
+        {
+            RemoveBottleConfirmViewModel viewModel = new RemoveBottleConfirmViewModel();
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var wine = await _context.Wine
+                .Include(w => w.ApplicationUser)
+                .Include(w => w.Winery)
+                .Include(w => w.Variety)
+                .FirstOrDefaultAsync(m => m.WineId == id);
+            if (wine == null)
+            {
+                return NotFound();
+            }
+
+            return View(wine);
+        }
+
+        //POST: Wines/RemoveFromCellar/5
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> RemoveBottle(int id)
+        {
+            var wine = await _context.Wine.FindAsync(id);
+
+            wine.Quantity--;
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
