@@ -61,6 +61,7 @@ namespace Sommelier.Controllers
                 .Include(w => w.Winery)
                 .Include(w => w.Variety)
                 .FirstOrDefaultAsync(m => m.WineId == id);
+
             if (wine == null)
             {
                 return NotFound();
@@ -218,21 +219,44 @@ namespace Sommelier.Controllers
             ModelState.Remove("wine.User");
             ModelState.Remove("newWine.Wine.User");
 
-            // If model state is valid
-            if (ModelState.IsValid)
+            
+            List<Wine> ExistingWine = await _context.Wine
+                .Include(w => w.Variety)
+                .Include(w => w.Winery)
+                .Where(w => w.Name == newWine.Wine.Name && w.WineryId == newWine.Wine.WineryId && w.VarietyId == newWine.Wine.VarietyId && w.Year == newWine.Wine.Year)
+                .Where(w => w.ApplicationUserId == user.Id)
+                .ToListAsync();
+
+            if(ExistingWine.Count > 0)
             {
-                // Add the user back
-                newWine.Wine.ApplicationUserId = user.Id;
+                UpdateBottleCountViewModel viewModel = new UpdateBottleCountViewModel();
 
-                // Add the wine
-                _context.Add(newWine.Wine);
+                viewModel.existingWine = ExistingWine;
 
-                // Save changes to database
-                await _context.SaveChangesAsync();
+                viewModel.newWine = newWine;
 
-                // Redirect to details view with id of product made using new object
-                return RedirectToAction(nameof(Details), new { id = newWine.Wine.WineId.ToString() });
+                return View("WineExists", viewModel);
             }
+
+            if (ExistingWine.Count == 0)
+            {
+                // If model state is valid
+                if (ModelState.IsValid)
+                {
+                    // Add the user back
+                    newWine.Wine.ApplicationUserId = user.Id;
+
+                    // Add the wine
+                    _context.Add(newWine.Wine);
+
+                    // Save changes to database
+                    await _context.SaveChangesAsync();
+
+                    // Redirect to details view with id of product made using new object
+                    return RedirectToAction(nameof(Details), new { id = newWine.Wine.WineId.ToString() });
+                }
+            }
+
             return View(newWine);
         }
 
@@ -424,6 +448,20 @@ namespace Sommelier.Controllers
             viewModel.searchTerm = search;
 
             return View(viewModel);
+        }
+
+        //POST:
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> UpdateQuantity(int id, UpdateBottleCountViewModel updatedWine)
+        {
+            var wine = await _context.Wine.FindAsync(id);
+
+            wine.Quantity += updatedWine.newWine.Wine.Quantity;
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
