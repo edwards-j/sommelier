@@ -1,0 +1,16 @@
+﻿@model Sommelier.Models.Wine
+
+@{
+    ViewData["Title"] = "RemoveBottleConfirm";
+}
+
+<h2>You've selected a @Model.Winery.Name @Model.Variety.Name from @Model.Year</h2>
+
+<h4>Would you like me to remove a bottle from your cellar</h4>
+<div>
+    <form asp-action="RemoveBottle" asp-route-id="@Model.WineId">
+        <input type="hidden" asp-for="WineId" />
+        <input type="submit" value="Yes" class="btn btn-success" />
+        <a class="btn btn-danger" asp-controller="Foods" asp-action="Index" asp-route-id="">No</a>
+    </form>
+</div>

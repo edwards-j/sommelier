@@ -8,11 +8,11 @@
 
 @if (Model.Count() > 1)
 {
-    <h4>In your cellar, you currently have @Model.Count() bottles</h4>
+    <h4>In your cellar, you currently have @Model.Count() different wines</h4>
 }
 else if (Model.Count() == 1)
 {
-    <h4>In your cellar, you currently have @Model.Count() bottle</h4>
+    <h4>In your cellar, you currently have @Model.Count() kind of wine</h4>
 }
 else if (Model.Count() == 0)
 {

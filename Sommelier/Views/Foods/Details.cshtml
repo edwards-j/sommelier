@@ -13,18 +13,26 @@
     <div>
         @foreach (var wine in Model.Wines)
         {
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">@wine.Winery.Name @wine.Variety.Name - @wine.Year</h3>
+            <a asp-controller="Wines" asp-action="RemoveBottleConfirm" asp-route-id="@wine.WineId">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">@wine.Winery.Name @wine.Variety.Name - @wine.Year</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>@wine.Name</p>
+                        @if (wine.Quantity == 1)
+                        {
+                        <p>You have @wine.Quantity bottle</p>
+                        } else
+                        {
+                        <p>You have @wine.Quantity bottles</p>
+                        }
+                    </div>
                 </div>
-                <div class="panel-body">
-                    <p>@wine.Name</p>
-                    <p>@wine.Quantity</p>
-                </div>
-            </div>
-            
-        }
-    </div>
+            </a>
+
+                }
+        </div>
 </div>
 <div>
     <a asp-action="Index">Back to List</a>
