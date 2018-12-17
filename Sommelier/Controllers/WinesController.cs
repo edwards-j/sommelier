@@ -359,5 +359,26 @@ namespace Sommelier.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        //GET: Wines?search="Pinot"
+        public async Task<IActionResult> Search(string search)
+        {
+            ApplicationUser user = await GetCurrentUserAsync();
+
+            SearchWineViewModel viewModel = new SearchWineViewModel();
+
+            List<Wine> wines = await _context.Wine
+                .Include(w => w.Variety)
+                .Include(w => w.Winery)
+                .OrderByDescending(w => w.WineId)
+                .Where(w => w.ApplicationUserId == user.Id)
+                .Where(w => w.Variety.Name.Contains(search) || w.Winery.Name.Contains(search))
+                .ToListAsync();
+
+            viewModel.Wines = wines;
+            viewModel.searchTerm = search;
+
+            return View(viewModel);
+        }
     }
 }
