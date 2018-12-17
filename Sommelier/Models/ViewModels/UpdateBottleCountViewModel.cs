@@ -9,6 +9,6 @@ namespace Sommelier.Models.ViewModels
     {
         public CreateWineViewModel newWine { get; set; }
 
-        public Wine existingWine { get; set; }
+        public List<Wine> existingWine { get; set; }
     }
 }

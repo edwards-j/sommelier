@@ -219,13 +219,15 @@ namespace Sommelier.Controllers
             ModelState.Remove("wine.User");
             ModelState.Remove("newWine.Wine.User");
 
-            Wine ExistingWine = await _context.Wine
-                .Where(w => w.ApplicationUserId == user.Id)
+            
+            List<Wine> ExistingWine = await _context.Wine
                 .Include(w => w.Variety)
                 .Include(w => w.Winery)
-                .Where(w => w.Name == newWine.Wine.Name && w.WineryId == newWine.Wine.WineryId && w.VarietyId == newWine.Wine.VarietyId && w.Year == newWine.Wine.Year).FirstAsync();
+                .Where(w => w.Name == newWine.Wine.Name && w.WineryId == newWine.Wine.WineryId && w.VarietyId == newWine.Wine.VarietyId && w.Year == newWine.Wine.Year)
+                .Where(w => w.ApplicationUserId == user.Id)
+                .ToListAsync();
 
-            if(ExistingWine != null)
+            if(ExistingWine.Count > 0)
             {
                 UpdateBottleCountViewModel viewModel = new UpdateBottleCountViewModel();
 
@@ -236,20 +238,23 @@ namespace Sommelier.Controllers
                 return View("WineExists", viewModel);
             }
 
-            // If model state is valid
-            if (ModelState.IsValid)
+            if (ExistingWine.Count == 0)
             {
-                // Add the user back
-                newWine.Wine.ApplicationUserId = user.Id;
+                // If model state is valid
+                if (ModelState.IsValid)
+                {
+                    // Add the user back
+                    newWine.Wine.ApplicationUserId = user.Id;
 
-                // Add the wine
-                _context.Add(newWine.Wine);
+                    // Add the wine
+                    _context.Add(newWine.Wine);
 
-                // Save changes to database
-                await _context.SaveChangesAsync();
+                    // Save changes to database
+                    await _context.SaveChangesAsync();
 
-                // Redirect to details view with id of product made using new object
-                return RedirectToAction(nameof(Details), new { id = newWine.Wine.WineId.ToString() });
+                    // Redirect to details view with id of product made using new object
+                    return RedirectToAction(nameof(Details), new { id = newWine.Wine.WineId.ToString() });
+                }
             }
 
             return View(newWine);
