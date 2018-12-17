@@ -61,6 +61,7 @@ namespace Sommelier.Controllers
                 .Include(w => w.Winery)
                 .Include(w => w.Variety)
                 .FirstOrDefaultAsync(m => m.WineId == id);
+
             if (wine == null)
             {
                 return NotFound();
@@ -218,6 +219,23 @@ namespace Sommelier.Controllers
             ModelState.Remove("wine.User");
             ModelState.Remove("newWine.Wine.User");
 
+            Wine ExistingWine = await _context.Wine
+                .Where(w => w.ApplicationUserId == user.Id)
+                .Include(w => w.Variety)
+                .Include(w => w.Winery)
+                .Where(w => w.Name == newWine.Wine.Name && w.WineryId == newWine.Wine.WineryId && w.VarietyId == newWine.Wine.VarietyId && w.Year == newWine.Wine.Year).FirstAsync();
+
+            if(ExistingWine != null)
+            {
+                UpdateBottleCountViewModel viewModel = new UpdateBottleCountViewModel();
+
+                viewModel.existingWine = ExistingWine;
+
+                viewModel.newWine = newWine;
+
+                return View("WineExists", viewModel);
+            }
+
             // If model state is valid
             if (ModelState.IsValid)
             {
@@ -233,6 +251,7 @@ namespace Sommelier.Controllers
                 // Redirect to details view with id of product made using new object
                 return RedirectToAction(nameof(Details), new { id = newWine.Wine.WineId.ToString() });
             }
+
             return View(newWine);
         }
 
@@ -424,6 +443,20 @@ namespace Sommelier.Controllers
             viewModel.searchTerm = search;
 
             return View(viewModel);
+        }
+
+        //POST:
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> UpdateQuantity(int id, UpdateBottleCountViewModel updatedWine)
+        {
+            var wine = await _context.Wine.FindAsync(id);
+
+            wine.Quantity += updatedWine.newWine.Wine.Quantity;
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
