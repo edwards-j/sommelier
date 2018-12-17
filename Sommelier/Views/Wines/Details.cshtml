@@ -1,4 +1,4 @@
-﻿@model Sommelier.Models.Wine
+﻿@model Sommelier.Models.ViewModels.WineDetailsViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -11,45 +11,54 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.Wine.Name)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.Wine.Name)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.WineryId)
+            @Html.DisplayNameFor(model => model.Wine.WineryId)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Winery.Name)
+            @Html.DisplayFor(model => model.Wine.Winery.Name)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.VarietyId)
+            @Html.DisplayNameFor(model => model.Wine.VarietyId)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Variety.Name)
+            @Html.DisplayFor(model => model.Wine.Variety.Name)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Year)
+            @Html.DisplayNameFor(model => model.Wine.Year)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Year)
+            @Html.DisplayFor(model => model.Wine.Year)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Favorite)
+            @Html.DisplayNameFor(model => model.Wine.Favorite)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Favorite)
+            @Html.DisplayFor(model => model.Wine.Favorite)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Quantity)
+            @Html.DisplayNameFor(model => model.Wine.Quantity)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Quantity)
+            @Html.DisplayFor(model => model.Wine.Quantity)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.WineId">Edit</a> |
-    <a asp-action="Delete" asp-route-id="@Model.WineId">Delete</a> |
+    <p>This wine pairs best with:</p>
+    <ul>
+        @foreach (var food in Model.Foods)
+        {
+            <li>@food.Name</li>
+        }
+    </ul>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Wine.WineId">Edit</a> |
+    <a asp-action="Delete" asp-route-id="@Model.Wine.WineId">Delete</a> |
     <a asp-action="Index">Back to List</a>
 </div>
