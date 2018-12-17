@@ -55,6 +55,8 @@ namespace Sommelier.Controllers
                 return NotFound();
             }
 
+            WineDetailsViewModel viewModel = new WineDetailsViewModel();
+
             var wine = await _context.Wine
                 .Include(w => w.Winery)
                 .Include(w => w.Variety)
@@ -64,7 +66,19 @@ namespace Sommelier.Controllers
                 return NotFound();
             }
 
-            return View(wine);
+            var foods = await _context.Food
+                .Include(f => f.FoodCategory)
+                    .ThenInclude(fc => fc.Category)
+                        .ThenInclude(c => c.Variety)
+                            .ThenInclude(v => v.Wines)
+                .Where(f => f.FoodCategory.Any(fc => fc.CategoryId == wine.Variety.CategoryId))
+                .ToListAsync()
+                ;
+
+            viewModel.Wine = wine;
+            viewModel.Foods = foods;
+
+            return View(viewModel);
         }
 
         // GET: Wines/Create
