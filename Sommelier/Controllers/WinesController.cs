@@ -145,9 +145,40 @@ namespace Sommelier.Controllers
 
             Varieties.Insert(13, new SelectListItem
             {
-                Text = "--- Rich White ---",
+                Text = "--- Rich Whites ---",
                 Value = ""
             });
+
+            Varieties.Insert(18, new SelectListItem
+            {
+                Text = "--- Sparkling ---",
+                Value = ""
+            });
+
+            Varieties.Insert(23, new SelectListItem
+            {
+                Text = "--- Light Reds ---",
+                Value = ""
+            });
+
+            Varieties.Insert(28, new SelectListItem
+            {
+                Text = "--- Medium Reds ---",
+                Value = ""
+            });
+
+            Varieties.Insert(35, new SelectListItem
+            {
+                Text = "--- Bold Reds ---",
+                Value = ""
+            });
+
+            Varieties.Insert(41, new SelectListItem
+            {
+                Text = "--- Dessert ---",
+                Value = ""
+            });
+
 
             //Attach the select list items to view model
             viewModel.Wineries = Wineries;
