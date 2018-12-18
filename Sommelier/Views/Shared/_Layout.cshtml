@@ -20,42 +20,44 @@
 <body>
     <partial name="_CookieConsentPartial" />
 
-    <nav>
-        <div class="nav-wrapper">
-            <ul class="">
-                <li><a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons large">menu</i></a></li>
-                <li><a asp-area="" asp-controller="Wines" asp-action="Index"><i class="material-icons large">local_bar</i></a></li>
-                <li><a asp-area="" asp-controller="Home" asp-action="Index"><i class="material-icons large">home</i></a></li>
-                <li><a asp-area="" asp-controller="Wines" asp-action="Create"><i class="material-icons large">add</i></a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <ul class="sidenav" id="mobile-demo">
-        <li><partial name="_LoginPartial" /></li>
-    </ul>
-
-    <div class="container body-content">
-        @RenderBody()
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper">
+                <ul class="center-align">
+                    <li><a class="waves-effect sidenav-trigger" href="#" data-target="mobile-demo"><i class="material-icons large">person</i></a></li>
+                    <li><a class="waves-effect" asp-area="" asp-controller="Wines" asp-action="Index"><i class="material-icons large">local_bar</i></a></li>
+                    <li><a class="waves-effect" asp-area="" asp-controller="Home" asp-action="Index"><i class="material-icons large">home</i></a></li>
+                    <li><a class="waves-effect" asp-area="" asp-controller="Wines" asp-action="Create"><i class="material-icons large">add</i></a></li>
+                </ul>
+            </div>
+        </nav>
     </div>
 
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <ul class="sidenav" id="mobile-demo">
+            <li><partial name="_LoginPartial" /></li>
+        </ul>
 
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
+        <div class="container body-content">
+            @RenderBody()
+        </div>
 
-    @RenderSection("Scripts", required: false)
+        <environment include="Development">
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            <script src="~/js/site.js" asp-append-version="true"></script>
+        </environment>
+        <environment exclude="Development">
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-test="window.jQuery"
+                    crossorigin="anonymous"
+                    integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+            </script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+            <script src="~/js/site.min.js" asp-append-version="true"></script>
+        </environment>
+
+        @RenderSection("Scripts", required: false)
 </body>
 </html>
