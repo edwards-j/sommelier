@@ -33,6 +33,7 @@ namespace Sommelier.Controllers
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         // GET: Wines
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             ApplicationUser user = await GetCurrentUserAsync();
@@ -48,6 +49,7 @@ namespace Sommelier.Controllers
         }
 
         // GET: Wines/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -83,6 +85,7 @@ namespace Sommelier.Controllers
         }
 
         // GET: Wines/Create
+        [Authorize]
         public async Task<IActionResult> Create()
         {
             //Gets current user and assigns them to a variable
@@ -219,7 +222,7 @@ namespace Sommelier.Controllers
             ModelState.Remove("wine.User");
             ModelState.Remove("newWine.Wine.User");
 
-            
+            //Checks to see if the newly added wine is already in the database 
             List<Wine> ExistingWine = await _context.Wine
                 .Include(w => w.Variety)
                 .Include(w => w.Winery)
@@ -227,6 +230,7 @@ namespace Sommelier.Controllers
                 .Where(w => w.ApplicationUserId == user.Id)
                 .ToListAsync();
 
+            //If the wine already exists, this code allows the user to to update their current inventory with the amount of bottles they were going to add
             if(ExistingWine.Count > 0)
             {
                 UpdateBottleCountViewModel viewModel = new UpdateBottleCountViewModel();
@@ -238,6 +242,7 @@ namespace Sommelier.Controllers
                 return View("WineExists", viewModel);
             }
 
+            //If the wine doesn't exist, add it to the database 
             if (ExistingWine.Count == 0)
             {
                 // If model state is valid
@@ -317,6 +322,7 @@ namespace Sommelier.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, Wine wine)
         {
             if (id != wine.WineId)
@@ -354,6 +360,7 @@ namespace Sommelier.Controllers
         }
 
         // GET: Wines/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -377,6 +384,7 @@ namespace Sommelier.Controllers
         // POST: Wines/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var wine = await _context.Wine.FindAsync(id);
