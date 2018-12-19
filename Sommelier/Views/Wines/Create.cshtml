@@ -4,46 +4,43 @@
     ViewData["Title"] = "Create";
 }
 
-<h2>Create</h2>
+<h2>Add A New Wine</h2>
 
-<h4>Wine</h4>
-<hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="CreateWinery">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label class="control-label">Add a new winery</label>
-                <input asp-for="Winery.Name" class="form-control" />
+            <div asp-validation-summary="ModelOnly" ></div>
+            <div class="input-field">
+                <input id="new_winery" asp-for="Winery.Name" class="form-control" />
+                <label for="new_winery">Add a new winery</label>
             </div>
             <div class="form-group">
                 <input type="submit" value="Add" class="btn btn-default" />
             </div>
         </form>
-        <form asp-action="Create">
+        <form asp-action="Create" class="input-field">
             <div class="form-group">
                 <label asp-for="Wine.WineryId" class="control-label">or select an existing winery</label>
                 <select asp-for="Wine.WineryId" class="form-control" asp-items="@Model.Wineries"></select>
                 <span asp-validation-for="Wine.WineryId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Wine.Name" class="control-label">Wine Name (if applicable)</label>
-                <input asp-for="Wine.Name" class="form-control" />
+            <div class="form-group input-field">
+                <label for="wine_name" asp-for="Wine.Name" class="control-label">Wine Name (if applicable)</label>
+                <input id="wine_name" asp-for="Wine.Name" class="form-control" />
                 <span asp-validation-for="Wine.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Wine.VarietyId" class="control-label">Select a variety</label>
                 <select asp-for="Wine.VarietyId" class="form-control" asp-items="@Model.Varieties"></select>
                 <span asp-validation-for="Wine.VarietyId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Wine.Year" class="control-label"></label>
-                <input asp-for="Wine.Year" class="form-control" />
+            <div class="form-group input-field">
+                <label for="wine_year" asp-for="Wine.Year" class="control-label"></label>
+                <input id="wine_year" asp-for="Wine.Year" class="form-control" />
                 <span asp-validation-for="Wine.Year" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Wine.Quantity" class="control-label"></label>
-                <input asp-for="Wine.Quantity" class="form-control" />
+            <div class="form-group input-field">
+                <label for="wine_quantity" asp-for="Wine.Quantity" class="control-label"></label>
+                <input id="wine_quantity" asp-for="Wine.Quantity" class="form-control" />
                 <span asp-validation-for="Wine.Quantity" class="text-danger"></span>
             </div>
             <div class="form-group">

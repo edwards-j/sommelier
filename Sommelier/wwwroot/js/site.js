@@ -1,14 +1,9 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
-
-
-document.addEventListener('DOMContentLoaded', function () {
-    var elems = document.querySelectorAll('.sidenav');
-    var instances = M.Sidenav.init(elems, options);
-});
-
+﻿// For nav side bar
 $(document).ready(function () {
     $('.sidenav').sidenav();
+});
+
+//For form inputs
+$(document).ready(function () {
+    $('select').formSelect();
 });
