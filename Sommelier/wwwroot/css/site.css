@@ -19,3 +19,7 @@ for details on configuring this project to bundle and minify static web assets. 
     height: 250px;
 }
 
+.wine_detail_header {
+    margin-top: 2em;
+}
+

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Details";
 }
 
-<div class="row">
+<div class="row wine_detail_header">
     <div class="col s6">
         @if (Model.Wine.Variety.CategoryId == 1 || Model.Wine.Variety.CategoryId == 2 || Model.Wine.Variety.CategoryId == 3)
         {
@@ -16,10 +16,11 @@
         }
     </div>
     <div class="col s6">
-        <h6>@Model.Wine.Name</h6>
-        <h6>@Model.Wine.Winery.Name</h6>
-        <h6>@Model.Wine.Variety.Name</h6>
-        <h6>@Model.Wine.Year</h6>
+        <h4>@Model.Wine.Name</h4>
+        <h3>@Model.Wine.Winery.Name</h3>
+        <h5>@Model.Wine.Variety.Name</h5>
+        <h5>@Model.Wine.Year</h5>
+        <h6>You have @Model.Wine.Quantity bottles in your cellar</h6>
     </div>
 </div>
 <div>
@@ -32,7 +33,6 @@
     </ul>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Wine.WineId">Edit</a> |
-    <a asp-action="Delete" asp-route-id="@Model.Wine.WineId">Delete</a> |
-    <a asp-action="Index">Back to List</a>
+    <a class="waves-effect waves-light btn" asp-action="Edit" asp-route-id="@Model.Wine.WineId">Edit</a>
+    <a class="waves-effect waves-light btn" asp-action="Delete" asp-route-id="@Model.Wine.WineId">Delete</a> 
 </div>
