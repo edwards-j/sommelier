@@ -4,49 +4,23 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Wine</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Wine.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Wine.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Wine.WineryId)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Wine.Winery.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Wine.VarietyId)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Wine.Variety.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Wine.Year)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Wine.Year)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Wine.Favorite)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Wine.Favorite)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Wine.Quantity)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Wine.Quantity)
-        </dd>
-    </dl>
+<div class="row">
+    <div class="col s6">
+        @if (Model.Wine.Variety.CategoryId == 1 || Model.Wine.Variety.CategoryId == 2 || Model.Wine.Variety.CategoryId == 3)
+        {
+            <img class="wine_bottle_glass" src="~/images/WhiteBottleGlass.svg" />
+        }
+        @if (Model.Wine.Variety.CategoryId == 5 || Model.Wine.Variety.CategoryId == 6 || Model.Wine.Variety.CategoryId == 7)
+        {
+            <img class="wine_bottle_glass" src="~/images/RedBottleGlass.svg" />
+        }
+    </div>
+    <div class="col s6">
+        <h6>@Model.Wine.Name</h6>
+        <h6>@Model.Wine.Winery.Name</h6>
+        <h6>@Model.Wine.Variety.Name</h6>
+        <h6>@Model.Wine.Year</h6>
+    </div>
 </div>
 <div>
     <p>This wine pairs best with:</p>

@@ -14,5 +14,8 @@ for details on configuring this project to bundle and minify static web assets. 
    margin: 1.5em 0
 }
 
-/*Cellar*/
+/*Wine Details*/
+.wine_bottle_glass {
+    height: 250px;
+}
 
