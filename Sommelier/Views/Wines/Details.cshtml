@@ -4,6 +4,8 @@
     ViewData["Title"] = "Details";
 }
 
+<a class="waves-effect waves-light btn-small back-button" href='javascript:history.go(-1)'><i class="material-icons left">keyboard_backspace</i>Back</a>
+
 <div class="row wine_detail_header">
     <div class="col s6">
         @if (Model.Wine.Variety.CategoryId == 1 || Model.Wine.Variety.CategoryId == 2 || Model.Wine.Variety.CategoryId == 3)

@@ -9,9 +9,14 @@ for details on configuring this project to bundle and minify static web assets. 
     padding-right: 15px;
 }
 
+.back-button {
+margin: 1em 0 0 0 !important
+}
+
+
 /*Home*/
 .home-buttons a {
-   margin: 1.5em 0
+    margin: 1.5em 0
 }
 
 /*Wine Details*/
