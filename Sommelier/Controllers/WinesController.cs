@@ -142,6 +142,13 @@ namespace Sommelier.Controllers
             }
 
             // Insert starting position into varieties list
+            Wineries.Insert(0, new SelectListItem
+            {
+                Text = "Select an existing winery...",
+                Value = ""
+            });
+
+            // Insert starting position into varieties list
             Varieties.Insert(0, new SelectListItem
             {
                 Text = "Assign a variety...",

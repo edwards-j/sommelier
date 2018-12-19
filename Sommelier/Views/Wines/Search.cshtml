@@ -4,8 +4,6 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>My Cellar</h2>
-
 @if (Model.Wines.Count() > 1)
 {
     <h4>In your cellar, you currently have @Model.Wines.Count() different wines that match the term '@Model.searchTerm'.</h4>
@@ -16,18 +14,21 @@ else if (Model.Wines.Count() == 1)
 }
 else if (Model.Wines.Count() == 0)
 {
-    <h4>You don't have any wines in your cellar that match that match the term '@Model.searchTerm'. Would you like to add a new wine?</h4>
+    <h4>You don't have any wines in your cellar that match that match the term '@Model.searchTerm'. </h4>
+    <h5>Would you like to add a new wine or search for something else?</h5>
 }
 
-<p>
-    <a asp-action="Create">Add New Wine</a>
-</p>
+    <div class="row">
+        <a class="col s5 waves-effect waves-light btn" asp-action="Create"><i class="material-icons right">add</i>Add Wine</a>
+        <a id="search_toggle_button" class="col s5 waves-effect offset-s2 waves-light btn "><i class="material-icons right">search</i>Search</a>
+    </div>
 
 @using (@Html.BeginForm("Search", "Wines", FormMethod.Get))
 {
-    <p class="text-info">
-        @Html.TextBox("search")<input type="submit" value="search" placeholder="Search for a Winery or Variety" />
-    </p>
+    <div id="search_container" class="input-field scale-transition scale-out">
+        <label for="search">Search for a wine</label>
+        @Html.TextBox("search")<button id="search_button" type="submit" class="btn-small waves-effect waves-light" value="search"><i class="material-icons right">chevron_right</i>Go</button>
+    </div>
 }
 
 

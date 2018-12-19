@@ -7,3 +7,8 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('select').formSelect();
 });
+
+//Toggles the search bar on the "My Cellar" view
+$("#search_toggle_button").click(function () {
+    $("#search_container").toggleClass("scale-out");
+})

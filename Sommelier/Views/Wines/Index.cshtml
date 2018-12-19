@@ -19,15 +19,16 @@ else if (Model.Count() == 0)
     <h4>You don't have any wines in your cellar. Let's change that</h4>
 }
 
-<p>
-    <a class="waves-effect waves-light btn" asp-action="Create"><i class="material-icons right">add</i>Add New Wine</a>
-</p>
+<div class="row">
+    <a class="col s5 waves-effect waves-light btn" asp-action="Create"><i class="material-icons right">add</i>Add Wine</a>
+    <a id="search_toggle_button" class="col s5 waves-effect offset-s2 waves-light btn "><i class="material-icons right">search</i>Search</a>
+</div>
 
 @using (@Html.BeginForm("Search", "Wines", FormMethod.Get))
 {
-<div class="input-field">
+<div id="search_container" class="input-field scale-transition scale-out">
     <label for="search">Search for a wine</label>
-        @Html.TextBox("search")<button id="search_button" type="submit" class="btn-small waves-effect waves-light" value="search"><i class="material-icons right">search</i>Search</button>
+        @Html.TextBox("search")<button id="search_button" type="submit" class="btn-small waves-effect waves-light" value="search"><i class="material-icons right">chevron_right</i>Go</button>
 </div>
    
 }
@@ -36,7 +37,7 @@ else if (Model.Count() == 0)
 {
     <a asp-action="Details" asp-route-id="@item.WineId">
         <div class="row ">
-            <div class="col s12 m6">
+            <div class="col s12">
                 <div class="card blue-grey darken-1 hoverable">
                     <div class="card-content white-text">
                         <span class="card-title">@item.Winery.Name @item.Variety.Name - @item.Year</span>

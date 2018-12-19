@@ -20,7 +20,6 @@
         </form>
         <form asp-action="Create" class="input-field">
             <div class="form-group">
-                <label asp-for="Wine.WineryId" class="control-label">or select an existing winery</label>
                 <select asp-for="Wine.WineryId" class="form-control" asp-items="@Model.Wineries"></select>
                 <span asp-validation-for="Wine.WineryId" class="text-danger"></span>
             </div>
