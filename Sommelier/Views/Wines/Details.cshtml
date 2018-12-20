@@ -4,17 +4,25 @@
     ViewData["Title"] = "Details";
 }
 
-<a class="waves-effect waves-light btn-small back-button" href='javascript:history.go(-1)'><i class="material-icons left">keyboard_backspace</i>Back</a>
+<a class="waves-effect waves-light btn-small back-button" asp-action="Index"><i class="material-icons left">keyboard_backspace</i>Back</a>
 
 <div class="row wine_detail_header">
     <div class="col s6">
         @if (Model.Wine.Variety.CategoryId == 1 || Model.Wine.Variety.CategoryId == 2 || Model.Wine.Variety.CategoryId == 3)
         {
-            <img class="wine_bottle_glass" src="~/images/WhiteBottleGlass.svg" />
+            <img class="wine_bottle_glass" src="~/images/White.svg" />
+        }
+        @if (Model.Wine.Variety.CategoryId == 4)
+        {
+            <img class="wine_bottle_glass" src="~/images/Sparkling.svg" />
         }
         @if (Model.Wine.Variety.CategoryId == 5 || Model.Wine.Variety.CategoryId == 6 || Model.Wine.Variety.CategoryId == 7)
         {
-            <img class="wine_bottle_glass" src="~/images/RedBottleGlass.svg" />
+            <img class="wine_bottle_glass" src="~/images/Red.svg" />
+        }
+        @if (Model.Wine.Variety.CategoryId == 8)
+        {
+            <img class="wine_bottle_glass" src="~/images/Dessert.svg" />
         }
     </div>
     <div class="col s6">
