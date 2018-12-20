@@ -8,11 +8,21 @@
 
 <h2>What are you having for dinner this evening?</h2>
 
+<div class="row">
 @foreach (var item in Model)
 {
-        <div>
-            <a asp-action="Details" asp-route-id="@item.FoodId">
-                @Html.DisplayFor(modelItem => item.Name)
-            </a>
+    <a asp-action="Details" asp-route-id="@item.FoodId">
+    <div class="col s6 ">
+      <div class="card hoverable">
+        <div class="card-image">
+          <img src="">
         </div>
+        <div class="card-content">
+            <p> @Html.DisplayFor(modelItem => item.Name)</p>
+        </div>
+      </div>
+           
+    </div>
+    </a>
 }
+</div>

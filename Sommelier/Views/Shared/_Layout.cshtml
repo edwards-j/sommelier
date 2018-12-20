@@ -20,8 +20,14 @@
 <body>
     <partial name="_CookieConsentPartial" />
 
-    <div class="navbar-fixed">
-        <nav>
+
+        <div class="container body-content">
+            @RenderBody()
+        </div>
+
+
+   
+        <nav class="navbar">
             <div class="nav-wrapper">
                 <ul class="center-align">
                     <li><a class="waves-effect sidenav-trigger" href="#" data-target="mobile-demo"><i class="material-icons large">person</i></a></li>
@@ -31,15 +37,11 @@
                 </ul>
             </div>
         </nav>
-    </div>
+
 
         <ul class="sidenav" id="mobile-demo">
             <li><partial name="_LoginPartial" /></li>
         </ul>
-
-        <div class="container body-content">
-            @RenderBody()
-        </div>
 
         <environment include="Development">
             <script src="~/lib/jquery/dist/jquery.js"></script>
