@@ -1,14 +1,19 @@
 ﻿body {
-    --wine-color: #7B2441
+    --wine-color: #7B2441;
+    margin-bottom: 60px
 }
 
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
-.body-content {
+
+/*
+    .body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
+
+*/
 
 .back-button {
 margin: 1em 0 0 0 !important
@@ -23,6 +28,16 @@ margin: 1em 0 0 0 !important
     width: 100%;
 }
 
+/*Login*/
+.login-wrapper {
+    background-color: var(--wine-color);
+    width: 100vw;
+    height: 100vh
+}
+
+.login-logo {
+    margin-top: .5em
+}
 
 /*Home*/
 .home-buttons a {
