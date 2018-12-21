@@ -33,12 +33,12 @@
         <h6>You have @Model.Wine.Quantity bottles in your cellar</h6>
     </div>
 </div>
-<div>
-    <p>This wine pairs best with:</p>
-    <ul>
+<div class="row">
+    <p class="col s6 offset-s3">This wine pairs best with:</p>
+    <ul class="row">
         @foreach (var food in Model.Foods)
         {
-            <li>@food.Name</li>
+            <li class="col s5 offset-s1 wine-detail-food">@food.Name</li>
         }
     </ul>
 </div>

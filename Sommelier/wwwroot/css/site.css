@@ -1,5 +1,6 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
-for details on configuring this project to bundle and minify static web assets. */
+﻿body {
+    --wine-color: #7B2441
+}
 
 
 /* Wrapping element */
@@ -15,6 +16,7 @@ margin: 1em 0 0 0 !important
 
 /*Navbar*/
 .navbar {
+    background-color: var(--wine-color);
     overflow: hidden;
     position: fixed;
     bottom: 0;
@@ -34,5 +36,13 @@ margin: 1em 0 0 0 !important
 
 .wine_detail_header {
     margin-top: 2em;
+}
+
+.wine-detail-food {
+    background-color: var(--wine-color);
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: .5em !important
 }
 
