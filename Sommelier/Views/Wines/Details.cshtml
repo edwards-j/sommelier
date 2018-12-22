@@ -4,7 +4,7 @@
     ViewData["Title"] = "Details";
 }
 
-<a class="waves-effect waves-light btn-small back-button" asp-action="Index"><i class="material-icons left">keyboard_backspace</i>Back</a>
+<a class="waves-effect btn-small back-button" asp-action="Index"><i class="material-icons left">keyboard_backspace</i>Back</a>
 
 <div class="row wine_detail_header">
     <div class="col s6">
@@ -34,15 +34,15 @@
     </div>
 </div>
 <div class="row">
-    <p class="col s6 offset-s3">This wine pairs best with:</p>
+    <p class="col s8 offset-s2 detail-food-header center-align">This wine pairs best with:</p>
     <ul class="row">
         @foreach (var food in Model.Foods)
         {
-            <li class="col s5 offset-s1 wine-detail-food">@food.Name</li>
+            <li class="col s3 offset-s2 wine-detail-food">@food.Name</li>
         }
     </ul>
 </div>
-<div>
-    <a class="waves-effect waves-light btn" asp-action="Edit" asp-route-id="@Model.Wine.WineId">Edit</a>
-    <a class="waves-effect waves-light btn" asp-action="Delete" asp-route-id="@Model.Wine.WineId">Delete</a> 
+<div class="row">
+    <a class="col s4 waves-effect waves-light btn yellow lighten-2 grey-text" asp-action="Edit" asp-route-id="@Model.Wine.WineId">Edit</a>
+    <a class="col s4 offset-s4 waves-effect  waves-light btn  red lighten-2" asp-action="Delete" asp-route-id="@Model.Wine.WineId">Delete</a> 
 </div>

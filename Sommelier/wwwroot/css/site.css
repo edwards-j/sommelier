@@ -1,5 +1,6 @@
 ﻿body {
     --wine-color: #7B2441;
+    --light-wine: #AE4F6E;
     margin-bottom: 60px
 }
 
@@ -16,7 +17,11 @@
 */
 
 .back-button {
-margin: 1em 0 0 0 !important
+margin: 1em 0 0 0 !important;
+background-color: white !important;
+color: var(--wine-color) !important;
+box-shadow: none !important;
+font-weight: 700;
 }
 
 /*Navbar*/
@@ -32,7 +37,8 @@ margin: 1em 0 0 0 !important
 .login-wrapper {
     background-color: var(--wine-color);
     width: 100vw;
-    height: 100vh
+    height: 100vh;
+    margin-left: -5.5%
 }
 
 .login-logo {
@@ -41,7 +47,7 @@ margin: 1em 0 0 0 !important
 
 /*Home*/
 .home-buttons a {
-    margin: 1.5em 0
+    margin: 1.5em 0;
 }
 
 /*Wine Details*/
@@ -59,5 +65,36 @@ margin: 1em 0 0 0 !important
     border-radius: 10px;
     text-align: center;
     margin-bottom: .5em !important
+}
+
+.detail-food-header {
+    font-weight: 600;
+    font-size: 1.25em !important;
+    margin-bottom: 1.5em !important
+}
+
+/* label focus color */
+.input-field input:focus + label {
+    color: var(--wine-color) !important;
+   
+}
+/* label underline focus color */
+.row .input-field input:focus {
+    border-bottom: 1px solid var(--wine-color) !important;
+    box-shadow: 0 1px 0 0 var(--wine-color) !important
+}
+
+.btn,
+.btn-large {
+    background-color: var(--light-wine) !important
+}
+
+.btn:hover,
+.btn-large:hover {
+    opacity: .85 !important
+}
+
+#search_button {
+    background-color: #387E43
 }
 
