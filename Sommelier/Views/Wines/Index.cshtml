@@ -6,19 +6,19 @@
 
 <a class="waves-effect btn-small back-button" href='javascript:history.go(-1)'><i class="material-icons left">keyboard_backspace</i>Back</a>
 
-<h2>My Cellar</h2>
+<h3 class="center-align">My Cellar</h3>
 
 @if (Model.Count() > 1)
 {
-    <h4>In your cellar, you currently have @Model.Count() different wines</h4>
+    <p class="cellar-count-p">In your cellar, you currently have @Model.Count() different wines</p>
 }
 else if (Model.Count() == 1)
 {
-    <h4>In your cellar, you currently have @Model.Count() kind of wine</h4>
+    <p class="cellar-count-p">In your cellar, you currently have @Model.Count() kind of wine</p>
 }
 else if (Model.Count() == 0)
 {
-    <h4>You don't have any wines in your cellar. Let's change that</h4>
+    <p class="cellar-count-p">You don't have any wines in your cellar. Let's change that</p>
 }
 
 <div class="row">

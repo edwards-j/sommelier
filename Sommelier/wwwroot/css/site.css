@@ -50,6 +50,14 @@ font-weight: 700;
     margin: 1.5em 0;
 }
 
+/*My Cellar*/
+.cellar-count-p {
+    margin: 1.25em 0 !important;
+    font-size: 1.64rem;
+    text-align: center;
+    font-weight: 400
+}
+
 /*Wine Details*/
 .wine_bottle_glass {
     height: 250px;
@@ -96,5 +104,9 @@ font-weight: 700;
 
 #search_button {
     background-color: #387E43
+}
+
+.save-wine-button {
+    background-color: #387E43 !important
 }
 
