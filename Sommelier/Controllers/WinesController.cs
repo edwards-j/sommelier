@@ -360,7 +360,32 @@ namespace Sommelier.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+
+                WineDetailsViewModel viewModel = new WineDetailsViewModel();
+
+                var updatedWine = await _context.Wine
+                .Include(w => w.Winery)
+                .Include(w => w.Variety)
+                .FirstOrDefaultAsync(m => m.WineId == id);
+
+                if (wine == null)
+                {
+                    return NotFound();
+                }
+
+                var foods = await _context.Food
+                    .Include(f => f.FoodCategory)
+                        .ThenInclude(fc => fc.Category)
+                            .ThenInclude(c => c.Variety)
+                                .ThenInclude(v => v.Wines)
+                    .Where(f => f.FoodCategory.Any(fc => fc.CategoryId == updatedWine.Variety.CategoryId))
+                    .ToListAsync()
+                    ;
+
+                viewModel.Wine = updatedWine;
+                viewModel.Foods = foods;
+
+                return View("Details", viewModel);
             }
             ViewData["ApplicationUserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", wine.ApplicationUserId);
             return View(wine);

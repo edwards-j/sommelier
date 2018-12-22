@@ -12,3 +12,8 @@ $(document).ready(function () {
 $("#search_toggle_button").click(function () {
     $("#search_container").toggleClass("scale-out");
 })
+
+
+$(document).ready(function () {
+    $('.modal').modal();
+});

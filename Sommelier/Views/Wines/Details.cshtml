@@ -43,6 +43,53 @@
     </ul>
 </div>
 <div class="row">
-    <a class="col s3 offset-s2 waves-effect waves-light btn yellow lighten-2 grey-text" asp-action="Edit" asp-route-id="@Model.Wine.WineId">Edit</a>
-    <a class="col s3 offset-s2 waves-effect  waves-light btn  red lighten-2" asp-action="Delete" asp-route-id="@Model.Wine.WineId">Delete</a> 
+    @*<a class="col s3 offset-s2 waves-effect waves-light btn yellow lighten-2 grey-text" asp-action="Edit" asp-route-id="@Model.Wine.WineId">Edit</a>*@
+    <button data-target="modal1" class="col s3 offset-s2 waves-effect waves-light btn yellow lighten-2 grey-text modal-trigger">Update</button>
+    <a class="col s3 offset-s2 waves-effect  waves-light btn  red lighten-2" asp-action="Delete" asp-route-id="@Model.Wine.WineId">Delete</a>
+</div>
+
+<div id="modal1" class="modal">
+    <form asp-action="Edit" asp-route-id="@Model.Wine.WineId">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="@Model.Wine.WineId" />
+        <div class="modal-content">
+        <div class="hide">
+            <div class="form-group">
+                <label asp-for="@Model.Wine.Name" class="control-label"></label>
+                <input asp-for="@Model.Wine.Name" class="form-control" />
+                <span asp-validation-for="@Model.Wine.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Wine.WineryId" class="control-label"></label>
+                <input asp-for="@Model.Wine.WineryId" class="form-control" />
+                <span asp-validation-for="@Model.Wine.WineryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Wine.VarietyId" class="control-label"></label>
+                <input asp-for="@Model.Wine.VarietyId" class="form-control" />
+                <span asp-validation-for="@Model.Wine.VarietyId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Wine.Year" class="control-label"></label>
+                <input asp-for="@Model.Wine.Year" class="form-control" />
+                <span asp-validation-for="@Model.Wine.Year" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" asp-for="@Model.Wine.Favorite" /> @Html.DisplayNameFor(model => Model.Wine.Favorite)
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.Wine.Quantity" class="control-label"></label>
+            <input asp-for="@Model.Wine.Quantity" class="form-control" />
+            <span asp-validation-for="@Model.Wine.Quantity" class="text-danger"></span>
+        </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" value="Save" class="btn-small waves-effect waves-light green lighten-1" />
+        </div>
+    </form>
 </div>
