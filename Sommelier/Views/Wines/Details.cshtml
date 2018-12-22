@@ -38,9 +38,11 @@
     <ul class="row">
         @foreach (var food in Model.Foods)
         {
-            <li class="col s3 offset-s2 wine-detail-food">@food.Name</li>
-        }
-    </ul>
+        <a asp-controller="Foods" asp-action="Details" asp-route-id="@food.FoodId" class="col s3 offset-s2 wine-detail-food z-depth-2">
+            @food.Name</a>
+
+            }
+</ul>
 </div>
 <div class="row">
     @*<a class="col s3 offset-s2 waves-effect waves-light btn yellow lighten-2 grey-text" asp-action="Edit" asp-route-id="@Model.Wine.WineId">Edit</a>*@
@@ -76,11 +78,10 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" asp-for="@Model.Wine.Favorite" /> @Html.DisplayNameFor(model => Model.Wine.Favorite)
-                </label>
-            </div>
+            <label>
+                <input type="checkbox" id="fav-check" asp-for="@Model.Wine.Favorite">
+                <span for="fav-check">Favorite</span>
+            </label>
         </div>
         <div class="form-group">
             <label asp-for="@Model.Wine.Quantity" class="control-label"></label>
