@@ -23,14 +23,14 @@ else if (Model.Count() == 0)
 
 <div class="row">
     <a class="col s5 waves-effect waves-light btn" asp-action="Create"><i class="material-icons right">add</i>Add Wine</a>
-    <a id="search_toggle_button" class="col s5 waves-effect offset-s2 waves-light btn "><i class="material-icons right">search</i>Search</a>
+    <a id="search_toggle_button" class="col s5 waves-effect offset-s2 waves-light btn"><i class="material-icons right">search</i>Search</a>
 </div>
 
 @using (@Html.BeginForm("Search", "Wines", FormMethod.Get))
 {
 <div id="search_container" class="input-field scale-transition scale-out">
     <label for="search">Search for a wine</label>
-        @Html.TextBox("search")<button id="search_button" type="submit" class="btn-small waves-effect waves-light" value="search"><i class="material-icons right">chevron_right</i>Go</button>
+        @Html.TextBox("search")<button id="search_button" type="submit" class="btn-small waves-effect waves-light green lighten-1" value="search"><i class="material-icons right">chevron_right</i>Go</button>
 </div>
    
 }
