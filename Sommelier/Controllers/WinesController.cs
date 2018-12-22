@@ -95,7 +95,7 @@ namespace Sommelier.Controllers
             var AllVarieties = _context.Variety;
 
             //Get all of the wineries from the database
-            var AllWineries = _context.Winery;
+            var AllWineries = _context.Winery.OrderBy(w => w.Name);
 
             //Create a select list of varieties
             List<SelectListItem> Varieties = new List<SelectListItem>();
