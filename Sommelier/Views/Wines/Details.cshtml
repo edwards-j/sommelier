@@ -7,7 +7,7 @@
 <a class="waves-effect btn-small back-button" asp-action="Index"><i class="material-icons left">keyboard_backspace</i>Back</a>
 
 <div class="row wine_detail_header">
-    <div class="col s6">
+    <div class="col s5 offset-s1">
         @if (Model.Wine.Variety.CategoryId == 1 || Model.Wine.Variety.CategoryId == 2 || Model.Wine.Variety.CategoryId == 3)
         {
             <img class="wine_bottle_glass" src="~/images/White.svg" />
@@ -25,7 +25,7 @@
             <img class="wine_bottle_glass" src="~/images/Dessert.svg" />
         }
     </div>
-    <div class="col s6">
+    <div class="col s5">
         <h4>@Model.Wine.Name</h4>
         <h3>@Model.Wine.Winery.Name</h3>
         <h5>@Model.Wine.Variety.Name</h5>
@@ -90,7 +90,7 @@
         </div>
         </div>
         <div class="modal-footer">
-            <input type="submit" value="Save" class="btn-small waves-effect waves-light green lighten-1" />
+            <input type="submit" value="Save" class="btn-small waves-effect waves-light green lighten-1 save-updates-btn" />
         </div>
     </form>
 </div>

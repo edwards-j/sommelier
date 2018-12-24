@@ -6,7 +6,7 @@
 
 <a class="waves-effect btn-small back-button" href='javascript:history.go(-1)'><i class="material-icons left">keyboard_backspace</i>Back</a>
 
-<h3 class="center-align">My Cellar</h3>
+<h3 class="center-align my-cellar-header">My Cellar</h3>
 
 @if (Model.Count() > 1)
 {
@@ -45,7 +45,7 @@ else if (Model.Count() == 0)
                         <span class="card-title">@item.Winery.Name @item.Variety.Name - @item.Year</span>
                         @if (item.Name == null)
                         {
-                            <div class="row">
+                            <div class="row index-card-bottom">
                                 <div  class="col s10">
                                     <p>Bottles in your cellar: @item.Quantity</p>
                                 </div>
