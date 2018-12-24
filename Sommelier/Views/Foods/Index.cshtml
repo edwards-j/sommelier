@@ -12,11 +12,54 @@
 @foreach (var item in Model)
 {
     <a asp-action="Details" asp-route-id="@item.FoodId">
-    <div class="col s6 ">
-      <div class="card hoverable">
-        <div class="card-image">
-          <img src="">
-        </div>
+    <div class="col s6">
+      <div class="card hoverable food-card">
+          <div class="card-image">
+              @if (item.FoodId == 1)
+              {
+                  <img class="food-img" src="~/images/Food/Vegetables.svg" />
+              }
+              @if (item.FoodId == 2)
+              {
+                  <img class="food-img" src="~/images/Food/RoastedVeg.svg" />
+              }
+              @if (item.FoodId == 3)
+              {
+                  <img class="food-img" src="~/images/Food/SoftCheese.svg" />
+              }
+              @if (item.FoodId == 4)
+              {
+                  <img class="food-img" src="~/images/Food/HardCheese.svg" />
+              }
+              @if (item.FoodId == 5)
+              {
+                  <img class="food-img" src="~/images/Food/Starches.svg" />
+              }
+              @if (item.FoodId == 6)
+              {
+                  <img class="food-img" src="~/images/Food/Fish.svg" />
+              }
+              @if (item.FoodId == 7)
+              {
+                  <img class="food-img" src="~/images/Food/RichFish.svg" />
+              }
+              @if (item.FoodId == 8)
+              {
+                  <img class="food-img" src="~/images/Food/WhiteMeat.svg" />
+              }
+              @if (item.FoodId == 9)
+              {
+                  <img class="food-img" src="~/images/Food/RedMeat.svg" />
+              }
+              @if (item.FoodId == 10)
+              {
+                  <img class="food-img" src="~/images/Food/CuredMeat.svg" />
+              }
+              @if (item.FoodId == 11)
+              {
+                  <img class="food-img" src="~/images/Food/Sweets.svg" />
+              }
+          </div>
         <div class="card-content">
             <p> @Html.DisplayFor(modelItem => item.Name)</p>
         </div>

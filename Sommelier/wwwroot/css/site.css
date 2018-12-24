@@ -141,6 +141,23 @@ input.valid[type=number]:not(.browser-default) {
     opacity: .85 !important
 }
 
+/*Food Index*/
+.food-card{
+    border: 3px solid gray;
+    border-radius: 10px;
+    text-align: center;
+    color: dimgray
+}
+
+.vegetable {
+    fill: red !important
+}
+
+.food-img {
+    height: 115px;
+    padding-top: 24px
+}
+
 /*Remove Bottle*/
 .remove-bottle-confirm input {
     color: white !important
