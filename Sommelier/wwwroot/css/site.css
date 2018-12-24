@@ -68,6 +68,10 @@ font-weight: 700;
     font-weight: 400
 }
 
+.index-card-bottom {
+    margin-bottom: 0!important
+}
+
 /*Wine Details*/
 .wine_bottle_glass {
     height: 250px;
