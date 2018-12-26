@@ -33,6 +33,7 @@ namespace Sommelier.Controllers
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         // GET: Wines
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             ApplicationUser user = await GetCurrentUserAsync();
@@ -48,6 +49,7 @@ namespace Sommelier.Controllers
         }
 
         // GET: Wines/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -83,6 +85,7 @@ namespace Sommelier.Controllers
         }
 
         // GET: Wines/Create
+        [Authorize]
         public async Task<IActionResult> Create()
         {
             //Gets current user and assigns them to a variable
@@ -92,7 +95,7 @@ namespace Sommelier.Controllers
             var AllVarieties = _context.Variety;
 
             //Get all of the wineries from the database
-            var AllWineries = _context.Winery;
+            var AllWineries = _context.Winery.OrderBy(w => w.Name);
 
             //Create a select list of varieties
             List<SelectListItem> Varieties = new List<SelectListItem>();
@@ -137,6 +140,13 @@ namespace Sommelier.Controllers
                 // Add li to Varieties list
                 Wineries.Add(li);
             }
+
+            // Insert starting position into varieties list
+            Wineries.Insert(0, new SelectListItem
+            {
+                Text = "Select an existing winery...",
+                Value = ""
+            });
 
             // Insert starting position into varieties list
             Varieties.Insert(0, new SelectListItem
@@ -219,7 +229,7 @@ namespace Sommelier.Controllers
             ModelState.Remove("wine.User");
             ModelState.Remove("newWine.Wine.User");
 
-            
+            //Checks to see if the newly added wine is already in the database 
             List<Wine> ExistingWine = await _context.Wine
                 .Include(w => w.Variety)
                 .Include(w => w.Winery)
@@ -227,6 +237,7 @@ namespace Sommelier.Controllers
                 .Where(w => w.ApplicationUserId == user.Id)
                 .ToListAsync();
 
+            //If the wine already exists, this code allows the user to to update their current inventory with the amount of bottles they were going to add
             if(ExistingWine.Count > 0)
             {
                 UpdateBottleCountViewModel viewModel = new UpdateBottleCountViewModel();
@@ -238,6 +249,7 @@ namespace Sommelier.Controllers
                 return View("WineExists", viewModel);
             }
 
+            //If the wine doesn't exist, add it to the database 
             if (ExistingWine.Count == 0)
             {
                 // If model state is valid
@@ -317,6 +329,7 @@ namespace Sommelier.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, Wine wine)
         {
             if (id != wine.WineId)
@@ -347,13 +360,39 @@ namespace Sommelier.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+
+                WineDetailsViewModel viewModel = new WineDetailsViewModel();
+
+                var updatedWine = await _context.Wine
+                .Include(w => w.Winery)
+                .Include(w => w.Variety)
+                .FirstOrDefaultAsync(m => m.WineId == id);
+
+                if (wine == null)
+                {
+                    return NotFound();
+                }
+
+                var foods = await _context.Food
+                    .Include(f => f.FoodCategory)
+                        .ThenInclude(fc => fc.Category)
+                            .ThenInclude(c => c.Variety)
+                                .ThenInclude(v => v.Wines)
+                    .Where(f => f.FoodCategory.Any(fc => fc.CategoryId == updatedWine.Variety.CategoryId))
+                    .ToListAsync()
+                    ;
+
+                viewModel.Wine = updatedWine;
+                viewModel.Foods = foods;
+
+                return View("Details", viewModel);
             }
             ViewData["ApplicationUserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", wine.ApplicationUserId);
             return View(wine);
         }
 
         // GET: Wines/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -377,6 +416,7 @@ namespace Sommelier.Controllers
         // POST: Wines/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var wine = await _context.Wine.FindAsync(id);

@@ -4,53 +4,78 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>My Cellar</h2>
+<a class="waves-effect btn-small back-button" href='javascript:history.go(-1)'><i class="material-icons left">keyboard_backspace</i>Back</a>
+
+<h3 class="center-align my-cellar-header">My Cellar</h3>
 
 @if (Model.Count() > 1)
 {
-    <h4>In your cellar, you currently have @Model.Count() different wines</h4>
+    <p class="cellar-count-p">In your cellar, you currently have @Model.Count() different wines</p>
 }
 else if (Model.Count() == 1)
 {
-    <h4>In your cellar, you currently have @Model.Count() kind of wine</h4>
+    <p class="cellar-count-p">In your cellar, you currently have @Model.Count() kind of wine</p>
 }
 else if (Model.Count() == 0)
 {
-    <h4>You don't have any wines in your cellar. Let's change that</h4>
+    <p class="cellar-count-p">You don't have any wines in your cellar. Let's change that.</p>
 }
 
-<p>
-    <a asp-action="Create">Add New Wine</a>
-</p>
+<div class="row">
+    <a class="col s5 waves-effect waves-light btn" asp-action="Create"><i class="material-icons right">add</i>Add Wine</a>
+    <a id="search_toggle_button" class="col s5 waves-effect offset-s2 waves-light btn"><i class="material-icons right">search</i>Search</a>
+</div>
 
 @using (@Html.BeginForm("Search", "Wines", FormMethod.Get))
 {
-    <p class="text-info">
-        @Html.TextBox("search")<input type="submit" value="search" placeholder="Search for a Winery or Variety" />
-    </p>
+<div id="search_container" class="input-field scale-transition scale-out">
+    <label for="search">Search for a wine</label>
+        @Html.TextBox("search")<button id="search_button" type="submit" class="btn-small waves-effect waves-light green lighten-1" value="search"><i class="material-icons right">chevron_right</i>Go</button>
+</div>
+   
 }
-
 
 @foreach (var item in Model)
 {
     <a asp-action="Details" asp-route-id="@item.WineId">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title">@item.Winery.Name @item.Variety.Name - @item.Year</h3>
+        <div class="row ">
+            <div class="col s12">
+                <div class="card blue-grey darken-1 hoverable">
+                    <div class="card-content white-text">
+                        <span class="card-title">@item.Winery.Name @item.Variety.Name - @item.Year</span>
+                        @if (item.Name == null)
+                        {
+                            <div class="row index-card-bottom">
+                                <div  class="col s10">
+                                    <p>Bottles in your cellar: @item.Quantity</p>
+                                </div>
+                                @if (item.Favorite == true)
+                                {
+                                    <div class="col s1 offset-s1">
+                                        <i class="fas fa-heart"></i>
+                                    </div>
+                                }
+                                </div>
+                                }
+                                @if (item.Name != null)
+                                {
+                                    <div class="row index-card-bottom">
+                                        <div class="col s10">
+                                            <p>Wine Name: @item.Name</p>
+                                            <p>Bottles in your cellar: @item.Quantity</p>
+                                        </div>
+                                        @if (item.Favorite == true)
+                                        {
+                                            <div class="col s1 offset-s1">
+                                                <i class="fas fa-heart"></i>
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        </div>
             </div>
-            @if (item.Name == null)
-            {
-                <div class="panel-body">
-                    <p>Bottles in your cellar: @item.Quantity</p>
-                </div>
-            }
-            @if (item.Name != null)
-            {
-                <div class="panel-body">
-                    <p>Wine Name: @item.Name</p>
-                    <p>Bottles in your cellar: @item.Quantity</p>
-                </div>
-            }
         </div>
     </a>
 }
+

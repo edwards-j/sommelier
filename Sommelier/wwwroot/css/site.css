@@ -1,34 +1,165 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
-for details on configuring this project to bundle and minify static web assets. */
+﻿body {
+    --wine-color: #7B2441;
+    --light-wine: #AE4F6E;
+    margin-bottom: 60px;
+    font-family: 'Asap', sans-serif !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: 'Flamenco', cursive !important;
+    font-weight: inherit
+}
 
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
-.body-content {
+
+/*
+    .body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
 
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
+*/
+
+.back-button {
+margin: 1em 0 0 0 !important;
+background-color: white !important;
+color: var(--wine-color) !important;
+box-shadow: none !important;
+font-weight: 700;
 }
 
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
+/*Navbar*/
+.navbar {
+    background-color: var(--wine-color);
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
     width: 100%;
 }
 
-/* QR code generator */
-#qrCode {
-    margin: 15px;
+/*Login*/
+.login-wrapper {
+    background-color: var(--wine-color);
+    width: 100vw;
+    height: 100vh;
+    margin-left: -5.5%
 }
 
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
-    }
+.login-logo {
+    margin-top: .5em
 }
+
+/*Home*/
+.home-buttons a {
+    margin: 1.5em 0;
+}
+
+/*My Cellar*/
+.my-cellar-header {
+    font-weight: 500;
+    font-size: 3.5rem;
+}
+
+.cellar-count-p {
+    margin: 1.25em 0 !important;
+    font-size: 1.64rem;
+    text-align: center;
+    font-weight: 400
+}
+
+.index-card-bottom {
+    margin-bottom: 0!important
+}
+
+/*Wine Details*/
+.wine_bottle_glass {
+    height: 250px;
+}
+
+.wine_detail_header {
+    margin-top: 2em;
+}
+
+.wine-detail-food {
+    background-color: var(--wine-color);
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: .5em !important
+}
+
+.detail-food-header {
+    font-weight: 600;
+    font-size: 1.25em !important;
+    margin-bottom: 1.5em !important
+}
+
+.save-updates-btn input {
+    color: white !important
+}
+
+/*Create Wine*/
+
+.dropdown-content li > a,
+.dropdown-content li > span {
+    color: black !important
+}
+
+.select-wrapper.valid > input.select-dropdown,
+select-dropdown dropdown-trigger valid,
+input.valid[type=text]:not(.browser-default),
+input.valid[type=number]:not(.browser-default) {
+    border-bottom: 1px solid var(--wine-color) !important;
+    -webkit-box-shadow: 0 1px 0 0 var(--wine-color) !important;
+    box-shadow: 0 1px 0 0 var(--wine-color) !important;
+}
+
+
+/* label focus color */
+.input-field input:focus + label {
+    color: var(--wine-color) !important;
+}
+/* label underline focus color */
+.row .input-field input:focus {
+    border-bottom: 1px solid var(--wine-color) !important;
+    box-shadow: 0 1px 0 0 var(--wine-color) !important
+}
+
+.btn,
+.btn-large {
+    background-color: var(--light-wine) !important
+}
+
+.btn:hover,
+.btn-large:hover {
+    opacity: .85 !important
+}
+
+/*Food Index*/
+.food-card{
+    border: 3px solid gray;
+    border-radius: 10px;
+    text-align: center;
+    color: dimgray
+}
+
+.vegetable {
+    fill: red !important
+}
+
+.food-img {
+    height: 115px;
+    padding-top: 24px
+}
+
+/*Remove Bottle*/
+.remove-bottle-confirm input {
+    color: white !important
+}
+

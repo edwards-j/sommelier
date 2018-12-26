@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Sommelier.Data;
@@ -29,6 +30,7 @@ namespace Sommelier.Controllers
         // Create component to get current user from the _userManager variable
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             ApplicationUser user = await GetCurrentUserAsync();

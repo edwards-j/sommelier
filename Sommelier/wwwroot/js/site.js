@@ -1,4 +1,19 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿// For nav side bar
+$(document).ready(function () {
+    $('.sidenav').sidenav();
+});
 
-// Write your JavaScript code.
+//For form inputs
+$(document).ready(function () {
+    $('select').formSelect();
+});
+
+//Toggles the search bar on the "My Cellar" view
+$("#search_toggle_button").click(function () {
+    $("#search_container").toggleClass("scale-out");
+})
+
+
+$(document).ready(function () {
+    $('.modal').modal();
+});

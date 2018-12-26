@@ -4,18 +4,13 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h3>Cheers @Model.FirstName, welcome to Sommelier</h3>
+<div >
+    <h3 class="center-align">Cheers @Model.FirstName, welcome to Sommelier</h3>
+    <div class="row home-buttons">
+            <a class="col s12 waves-effect waves-light btn-large" asp-controller="Wines" asp-action="Index">My Cellar</a>
+        
+            <a class="col s12 waves-effect waves-light btn-large" asp-controller="Foods" asp-action="Index">Recommendations</a>
 
-    <div>
-        <a class="btn btn-primary btn-lg btn-block" asp-controller="Wines" asp-action="Index">My Cellar</a>
-    </div>
-
-    <div>
-        <a class="btn btn-primary btn-lg btn-block" asp-controller="Foods" asp-action="Index">Recommendations</a>
-    </div>
-
-    <div>
-        <a class="btn btn-primary btn-lg btn-block" asp-controller="Wines" asp-action="Create">Add Wine</a>
+            <a class="col s12 waves-effect waves-light btn-large" asp-controller="Wines" asp-action="Create">Add Wine</a>
     </div>
 </div>
