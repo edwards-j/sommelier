@@ -6,7 +6,7 @@
 
 <h2>You've selected a @Model.Winery.Name @Model.Variety.Name from @Model.Year</h2>
 
-<h4>Would you like me to remove a bottle from your cellar?</h4>
+<p>Would you like me to remove a bottle from your cellar?</p>
 <div>
     <form asp-action="RemoveBottle" asp-route-id="@Model.WineId" class="row">
         <input type="hidden" asp-for="WineId" />
