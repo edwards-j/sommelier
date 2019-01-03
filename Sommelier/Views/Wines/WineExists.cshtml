@@ -4,11 +4,12 @@
     ViewData["Title"] = "WineExists";
 }
 
-<h2>It appears as though you already have @Model.existingWine[0].Quantity bottles of the @Model.existingWine[0].Year @Model.existingWine[0].Winery.Name @Model.existingWine[0].Variety.Name in your cellar. Would you like to add @Model.newWine.Wine.Quantity to your existing inventory?</h2>
+<p class="wine-exists-header">It appears as though you already have @Model.existingWine[0].Quantity bottles of the @Model.existingWine[0].Year @Model.existingWine[0].Winery.Name @Model.existingWine[0].Variety.Name in your cellar. </p>
+<p class="wine-exists-header">I'll go ahead and add @Model.newWine.Wine.Quantity bottles to your existing inventory.</p>
 
-<form asp-action="UpdateQuantity" asp-route-id="@Model.existingWine[0].WineId">
+<form asp-action="UpdateQuantity" asp-route-id="@Model.existingWine[0].WineId" class="row">
     <input type="hidden" asp-for="@Model.existingWine[0].WineId" />
     <input type="hidden" asp-for="@Model.newWine.Wine.Quantity" value=@Model.newWine.Wine.Quantity/>
-    <button class="btn btn-success">Yes</button>
+    <button class="btn btn-success caption col s12">Ok</button>
 </form>
 
