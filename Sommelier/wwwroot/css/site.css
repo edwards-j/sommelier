@@ -55,6 +55,10 @@ font-weight: 700;
     margin-top: .5em
 }
 
+.login-link {
+    color: white;
+}
+
 /*Home*/
 .home-buttons a {
     margin: 1.5em 0;
@@ -179,5 +183,10 @@ input.valid[type=number]:not(.browser-default) {
 /*Remove Bottle*/
 .remove-bottle-confirm input {
     color: white !important
+}
+
+.remove-confirm-body-text {
+    font-size: 1.2em;
+    text-align: center;
 }
 

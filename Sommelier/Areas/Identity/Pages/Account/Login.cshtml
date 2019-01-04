@@ -17,7 +17,7 @@
                 <form method="post">
                     <div asp-validation-summary="All" class="text-danger"></div>
                     <div class="input-field">
-                        <label for="long_email" asp-for="Input.Email"></label>
+                        <label for="login_email" asp-for="Input.Email"></label>
                         <input id="login_email" asp-for="Input.Email" class="form-control" />
                         <span asp-validation-for="Input.Email" class="text-danger"></span>
                     </div>
@@ -39,10 +39,10 @@
                     </div>
                     <div class="form-group">
                         <p>
-                            <a asp-page="./ForgotPassword">Forgot your password?</a>
+                            <a class="login-link" asp-page="./ForgotPassword">Forgot your password?</a>
                         </p>
                         <p>
-                            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                            <a class="login-link" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
                         </p>
                     </div>
                 </form>

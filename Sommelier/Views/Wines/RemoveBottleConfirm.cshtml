@@ -4,9 +4,9 @@
     ViewData["Title"] = "RemoveBottleConfirm";
 }
 
-<h2>You've selected a @Model.Winery.Name @Model.Variety.Name from @Model.Year</h2>
+<h3 class="center-align">You've selected a @Model.Winery.Name @Model.Variety.Name from @Model.Year</h3>
 
-<p>Would you like me to remove a bottle from your cellar?</p>
+<p class="remove-confirm-body-text">Would you like me to remove a bottle from your cellar?</p>
 <div>
     <form asp-action="RemoveBottle" asp-route-id="@Model.WineId" class="row">
         <input type="hidden" asp-for="WineId" />
