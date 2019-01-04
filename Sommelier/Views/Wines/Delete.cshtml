@@ -4,20 +4,17 @@
     ViewData["Title"] = "Delete";
 }
 
-<h2>Delete</h2>
-
-<h5>Are you sure you want to remove this wine from your cellar?</h5>
-<hr />
+<h3>Are you sure you want to remove this wine from your cellar?</h3>
 <div>
-    <h2>@Model.Name</h2>
+    <h3>@Model.Name</h3>
     <h3>@Model.Winery.Name</h3>
     <h5>@Model.Variety.Name</h5>
     <h5>@Model.Year</h5>
-    <h6>@Model.Quantity</h6>
-
-    <form asp-action="Delete" class="row">
+    <h6>Bottle Count: @Model.Quantity</h6>
+    
+    <form asp-action="Delete" class="row delete-confirm-buttons">
         <input type="hidden" asp-for="WineId" />
-        <a class="col s3 offset-s2 waves-effect waves-light btn yellow lighten-2 grey-text" href='javascript:history.go(-1)'>Back</a>
-        <input type="submit" value="Delete" class="waves-effect col s3 offset-s2 waves-light btn red lighten-2 white-text" />
+        <a class="col s3 offset-s2 waves-effect waves-light btn yellow lighten-2 grey-text" href='javascript:history.go(-1)'>No</a>
+        <input type="submit" value="Yes" class="waves-effect col s3 offset-s2 waves-light btn red lighten-2 white-text" />
     </form>
 </div>

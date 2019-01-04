@@ -108,8 +108,12 @@ font-weight: 700;
     color: white !important
 }
 
-/*Create Wine*/
+/*Delete Wine*/
+.delete-confirm-buttons{
+    margin-top: 3em;
+}
 
+/*Create Wine*/
 .dropdown-content li > a,
 .dropdown-content li > span {
     color: black !important

@@ -88,10 +88,22 @@ namespace Sommelier.Controllers
                 names.Insert(names.Count() - 1, "or");
 
                 viewModel.FoodCategories = names.Join(", ");
+
+                var lastComma = viewModel.FoodCategories.LastIndexOf(", ");
+
+                viewModel.FoodCategories = viewModel.FoodCategories.Remove(lastComma, 1);
             }
 
             if (viewModel.Wines.Count == 0)
             {
+               
+
+                viewModel.FoodCategories = names.Join(", ");
+
+                var lastComma = viewModel.FoodCategories.LastIndexOf(", ");
+
+                viewModel.FoodCategories = viewModel.FoodCategories.Remove(lastComma, 1);
+
                 return View("NoWineFound", viewModel);
             }
 
