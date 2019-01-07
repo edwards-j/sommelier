@@ -10,6 +10,6 @@
 <form asp-action="UpdateQuantity" asp-route-id="@Model.existingWine[0].WineId" class="row">
     <input type="hidden" asp-for="@Model.existingWine[0].WineId" />
     <input type="hidden" asp-for="@Model.newWine.Wine.Quantity" value=@Model.newWine.Wine.Quantity/>
-    <button class="btn btn-success caption col s12">Ok</button>
+    <button class="btn btn-success caption col s12 waves-effect waves-light">Ok</button>
 </form>
 
