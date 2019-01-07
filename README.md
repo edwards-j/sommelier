@@ -22,10 +22,10 @@ Sommelier's job is to help people with large wine collections keep track of thei
 ![alt text](Sommelier/wwwroot/READMEimgs/ERD.png)
 
 ## Screenshots
-![alt text](Sommelier/wwwroot/READMEimgs/Login.png)
-![alt text](Sommelier/wwwroot/READMEimgs/MyCellar.png)
-![alt text](Sommelier/wwwroot/READMEimgs/AddWine.png)
-![alt text](Sommelier/wwwroot/READMEimgs/Details.png)
-![alt text](Sommelier/wwwroot/READMEimgs/FoodSelect.png)
-![alt text](Sommelier/wwwroot/READMEimgs/Recommendations.png)
+![alt text](Sommelier/wwwroot/READMEimgs/Login.png){width: 30%;}
+![alt text](Sommelier/wwwroot/READMEimgs/MyCellar.png){width: 30%;}
+![alt text](Sommelier/wwwroot/READMEimgs/AddWine.png){width: 30%;}
+![alt text](Sommelier/wwwroot/READMEimgs/Details.png){width: 30%;}
+![alt text](Sommelier/wwwroot/READMEimgs/FoodSelect.png){width: 30%;}
+![alt text](Sommelier/wwwroot/READMEimgs/Recommendations.png){width: 30%;}
 
