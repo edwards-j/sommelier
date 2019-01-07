@@ -94,7 +94,10 @@ namespace Sommelier.Controllers
                 viewModel.FoodCategories = viewModel.FoodCategories.Remove(lastComma, 1);
             }
 
-            if (viewModel.Wines.Count == 0)
+            if (viewModel.Wines.Count == 0 && names.Count() == 2)
+            {
+                return View("NoWineFound", viewModel);
+            } else if (viewModel.Wines.Count == 0)
             {
                
 
